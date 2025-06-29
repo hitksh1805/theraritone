@@ -44,89 +44,136 @@ const Index = () => {
     }
   }, []);
 
-  // Enhanced Best Picks with detailed product information
-  const bestPicks = [
+  // UPDATED: Use the same product data as catalog
+  const catalogProducts = [
     {
       id: '1',
-      name: "Luxury Essentials",
-      price: 2999,
-      image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446",
-      backImageURL: "https://images.unsplash.com/photo-1566479179817-c0b5b4b8b1cc",
-      rating: 4.8,
-      category: "Dresses",
-      description: "Elegant silk dress for special occasions. Luxurious fabric with timeless design that makes you stand out.",
-      stock: 8,
-      tags: ['luxury', 'silk', 'elegant'],
-      sizes: ['XS', 'S', 'M', 'L'],
-      colors: ['Black', 'Navy', 'Burgundy']
+      name: 'Bold vibe Oversize Tshirt',
+      description: 'Luxury cotton t-shirt with premium finish and exceptional comfort. Made from 100% organic cotton.',
+      price: 696.00,
+      imageURL: 'Raritone Collection/Bold vibe Oversize Tshirt.jpg',
+      category: 'Tops',
+      stock: 10,
+      tags: ['Cotton', 'Premium', 'Casual'],
+      sizes: ['XS', 'S', 'M', 'L', 'XL'],
+      createdAt: new Date(),
+      rating: 4.8
     },
     {
       id: '2',
-      name: "Street Couture",
-      price: 3499,
-      image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b",
-      backImageURL: "https://images.unsplash.com/photo-1578662996442-48f60103fc96",
-      rating: 4.9,
-      category: "Outerwear",
-      description: "Premium streetwear hoodie with modern design. Perfect blend of comfort and style for urban fashion.",
-      stock: 12,
-      tags: ['streetwear', 'modern', 'comfort'],
-      sizes: ['S', 'M', 'L', 'XL'],
-      colors: ['Grey', 'Black', 'White']
+      name: 'Raritone Hoodie',
+      description: 'Raritone Hoodie from Theraritone. Crafted from premium materials, this hoodie ensures warmth and durability while offering a modern, minimalist design perfect for any wardrobe.',
+      price: 1043.13,
+      imageURL: 'Raritone Collection/Hoddie1(F).jpg',
+      backImageURL: 'Raritone Collection/Hoddie1(B).jpg',
+      category: 'Outerwear',
+      stock: 5,
+      tags: ['Hoodie', 'designer', 'Cozy'],
+      sizes: ['28', '30', '32', '34', '36'],
+      createdAt: new Date(),
+      rating: 4.9
     },
     {
       id: '3',
-      name: "Evening Collection",
-      price: 4999,
-      image: "https://images.unsplash.com/photo-1483985988355-763728e1935b",
-      backImageURL: "https://images.unsplash.com/photo-1551028719-00167b16eac5",
-      rating: 4.7,
-      category: "Formal",
-      description: "Sophisticated evening wear collection. Crafted with premium materials for special occasions.",
-      stock: 5,
-      tags: ['evening', 'formal', 'premium'],
-      sizes: ['XS', 'S', 'M', 'L', 'XL'],
-      colors: ['Black', 'Navy', 'Emerald']
+      name: 'Kiss me again Oversize Tshirt',
+      description: 'Its soft, premium fabric ensures lasting wear, while the chic, modern design adds a touch of effortless cool.',
+      price: 399.20,
+      imageURL: 'Raritone Collection/Kiss me again.jpeg',
+      category: 'Tops',
+      stock: 8,
+      tags: ['Tshirt', 'luxury', 'comfort'],
+      sizes: ['S', 'M', 'L', 'XL'],
+      createdAt: new Date(),
+      rating: 4.7
+    },
+    {
+      id: '4',
+      name: 'Pop Art tshirt',
+      description: 'This wearable masterpiece showcases bold, colorful graphics that pay homage to the iconic Pop Art movement, making it a statement piece in any wardrobe.',
+      price: 434.13,
+      imageURL: 'https://static.wixstatic.com/media/3903b5_4fde7750734f4f188841c462d77d27bb~mv2.jpg/v1/fill/w_500,h_667,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/3903b5_4fde7750734f4f188841c462d77d27bb~mv2.jpg',
+      category: 'Tops',
+      stock: 0, // Out of stock
+      tags: ['Tshirt', 'luxury', 'comfort'],
+      sizes: ['XS', 'S', 'M', 'L'],
+      createdAt: new Date(),
+      rating: 4.6
+    },
+    {
+      id: '5',
+      name: 'Raritone David Bowie Hoodie',
+      description: 'Celebrate the legacy of a music legend with the Raritone David Bowie Hoodie, designed exclusively for the discerning fan at Theraritone.',
+      price: 7999,
+      imageURL: 'https://static.wixstatic.com/media/3903b5_9e76791087d8471da8745d15ce88f383~mv2.jpg/v1/fill/w_346,h_490,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/3903b5_9e76791087d8471da8745d15ce88f383~mv2.jpg',
+      backImageURL: 'https://static.wixstatic.com/media/3903b5_d1930f8ee63542d0a3d165512779be61~mv2.jpg/v1/fill/w_348,h_490,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/3903b5_d1930f8ee63542d0a3d165512779be61~mv2.jpg',
+      category: 'Outerwear',
+      stock: 4,
+      tags: ['leather', 'jacket', 'premium'],
+      sizes: ['S', 'M', 'L', 'XL'],
+      colors: ['Black', 'Brown'],
+      createdAt: new Date(),
+      rating: 4.9
     }
   ];
 
-  const newArrivals = [
-    {
-      id: 1,
-      name: "Premium Cotton T-Shirt",
-      price: "₹1,999",
-      image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
-      tag: "New"
-    },
-    {
-      id: 2,
-      name: "Designer Jeans",
-      price: "₹3,999",
-      image: "https://images.unsplash.com/photo-1542272604-787c3835535d",
-      tag: "Trending"
-    },
-    {
-      id: 3,
-      name: "Luxury Hoodie",
-      price: "₹2,999",
-      image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7",
-      tag: "Popular"
-    },
-    {
-      id: 4,
-      name: "Silk Dress",
-      price: "₹5,999",
-      image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446",
-      tag: "Exclusive"
-    }
-  ];
+  // UPDATED: New Arrivals - Get latest 4 products from catalog
+  const newArrivals = catalogProducts
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .slice(0, 4)
+    .map(product => ({
+      id: product.id,
+      name: product.name,
+      price: `₹${product.price}`,
+      image: product.imageURL,
+      tag: product.stock === 0 ? 'Out of Stock' : 'New'
+    }));
 
+  // UPDATED: Categories - Use actual categories from catalog products
   const categories = [
-    { name: "T-Shirts", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab", count: "50+ Items", category: "Tops" },
-    { name: "Hoodies", image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7", count: "30+ Items", category: "Outerwear" },
-    { name: "Jeans", image: "https://images.unsplash.com/photo-1542272604-787c3835535d", count: "40+ Items", category: "Bottoms" },
-    { name: "Dresses", image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446", count: "25+ Items", category: "Dresses" }
+    { 
+      name: "T-Shirts", 
+      image: catalogProducts.find(p => p.category === 'Tops')?.imageURL || "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab", 
+      count: `${catalogProducts.filter(p => p.category === 'Tops').length} Items`, 
+      category: "Tops" 
+    },
+    { 
+      name: "Hoodies", 
+      image: catalogProducts.find(p => p.tags.includes('Hoodie'))?.imageURL || "https://images.unsplash.com/photo-1556821840-3a63f95609a7", 
+      count: `${catalogProducts.filter(p => p.tags.includes('Hoodie')).length} Items`, 
+      category: "Outerwear" 
+    },
+    { 
+      name: "Outerwear", 
+      image: catalogProducts.find(p => p.category === 'Outerwear')?.imageURL || "https://images.unsplash.com/photo-1542272604-787c3835535d", 
+      count: `${catalogProducts.filter(p => p.category === 'Outerwear').length} Items`, 
+      category: "Outerwear" 
+    },
+    { 
+      name: "Premium", 
+      image: catalogProducts.find(p => p.tags.includes('premium'))?.imageURL || "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446", 
+      count: `${catalogProducts.filter(p => p.tags.includes('premium')).length} Items`, 
+      category: "Premium" 
+    }
   ];
+
+  // UPDATED: Best Picks - Get top 3 highest rated products from catalog
+  const bestPicks = catalogProducts
+    .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+    .slice(0, 3)
+    .map(product => ({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.imageURL,
+      backImageURL: product.backImageURL,
+      rating: product.rating || 4.5,
+      category: product.category,
+      description: product.description,
+      stock: product.stock,
+      tags: product.tags,
+      sizes: product.sizes,
+      colors: product.colors
+    }));
 
   // Navigate to catalog with category filter
   const handleCategoryClick = (category: string) => {
@@ -301,7 +348,11 @@ const Index = () => {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute top-3 left-3">
-                      <span className="bg-[rgb(236,223,204)] text-[rgb(24,28,20)] font-medium rounded px-2 py-1 text-xs">
+                      <span className={`font-medium rounded px-2 py-1 text-xs ${
+                        item.tag === 'Out of Stock' 
+                          ? 'bg-red-500 text-white' 
+                          : 'bg-[rgb(236,223,204)] text-[rgb(24,28,20)]'
+                      }`}>
                         {item.tag}
                       </span>
                     </div>
@@ -326,7 +377,7 @@ const Index = () => {
                       {item.name}
                     </h3>
                     <p className="text-[rgb(105,117,101)] text-sm">
-                      From {item.price}
+                      {item.price}
                     </p>
                   </div>
                 </div>
@@ -442,7 +493,7 @@ const Index = () => {
                       </div>
                     </div>
                     <p className="text-[rgb(105,117,101)] text-sm">
-                      From ₹{item.price}
+                      ₹{item.price}
                     </p>
                   </div>
                 </div>
