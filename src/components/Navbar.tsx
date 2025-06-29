@@ -291,7 +291,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ onSearchOpen, onCartOpen, pageTitl
               )}
             </div>
 
-            {/* Center - Logo or Page Title - INCREASED LOGO SIZE */}
+            {/* Center - Logo or Page Title - INCREASED LOGO SIZE TO HEIGHT 20 (80px) */}
             <div className="flex-1 flex justify-center items-center">
               {pageTitle ? (
                 <div 
@@ -323,7 +323,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ onSearchOpen, onCartOpen, pageTitl
                     {pageTitle}
                   </motion.h1>
                   
-                  {/* INCREASED: Logo that appears on hover - LARGER SIZE */}
+                  {/* INCREASED: Logo that appears on hover - HEIGHT 20 (80px) */}
                   <motion.div
                     className="absolute inset-0 flex items-center justify-center"
                     animate={{
@@ -341,9 +341,9 @@ const Navbar: React.FC<NavbarProps> = memo(({ onSearchOpen, onCartOpen, pageTitl
                       alt="RARITONE"
                       style={{
                         filter: `brightness(1.15) contrast(1.08) drop-shadow(0 3px 12px rgba(0,0,0,0.25))`,
-                        height: isMobile ? '56px' : '60px', // INCREASED: Much larger logo size
+                        height: isMobile ? '64px' : '80px', // INCREASED: Height 20 = 80px
                         width: 'auto',
-                        maxWidth: isMobile ? '200px' : '300px', // INCREASED: Wider max width
+                        maxWidth: isMobile ? '240px' : '360px', // INCREASED: Proportionally wider
                         objectFit: 'contain'
                       }}
                     />
@@ -365,9 +365,9 @@ const Navbar: React.FC<NavbarProps> = memo(({ onSearchOpen, onCartOpen, pageTitl
                   onClick={() => navigate('/')}
                   style={{
                     filter: `brightness(1.15) contrast(1.08) drop-shadow(0 3px 12px rgba(0,0,0,0.25))`,
-                    height: isMobile ? '56px' : '60px', // INCREASED: Much larger logo size for homepage
+                    height: isMobile ? '64px' : '80px', // INCREASED: Height 20 = 80px for homepage
                     width: 'auto',
-                    maxWidth: isMobile ? '220px' : '320px', // INCREASED: Wider max width
+                    maxWidth: isMobile ? '260px' : '380px', // INCREASED: Proportionally wider
                     willChange: 'transform',
                     objectFit: 'contain'
                   }}
