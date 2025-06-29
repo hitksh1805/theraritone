@@ -1,73 +1,145 @@
-# Welcome to your Lovable project
+# RARITONE - AI-Powered Fashion Platform
 
-## Project info
+## Project Overview
 
-**URL**: https://lovable.dev/projects/a15690bf-aff6-4499-b6f1-16039441784d
+RARITONE is India's premier AI-powered fashion platform that revolutionizes the way people shop for clothing. Our innovative body scanning technology ensures perfect-fit fashion for every customer.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- **AI Body Scanning**: Advanced computer vision technology for accurate body measurements
+- **Perfect Fit Recommendations**: AI-powered size recommendations based on your unique measurements
+- **Premium Fashion Collection**: Curated selection of high-quality fashion items
+- **Virtual Try-On**: Experience how clothes look on you before purchasing
+- **Personalized Shopping**: AI-driven style recommendations based on your preferences
+- **Seamless Shopping Experience**: Modern, responsive web interface with smooth animations
 
-**Use Lovable**
+## Technology Stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/a15690bf-aff6-4499-b6f1-16039441784d) and start prompting.
+This project is built with modern web technologies:
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Frontend**: React 18 with TypeScript
+- **Styling**: Tailwind CSS with custom design system
+- **UI Components**: Radix UI primitives with shadcn/ui
+- **Animations**: Framer Motion for smooth interactions
+- **Backend**: Firebase for authentication and data storage
+- **Build Tool**: Vite for fast development and optimized builds
+- **State Management**: React Context API
+- **Routing**: React Router DOM
 
-**Use your preferred IDE**
+## Getting Started
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Prerequisites
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- Node.js (version 18 or higher)
+- npm or yarn package manager
 
-Follow these steps:
+### Installation
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd raritone-fashion-platform
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+2. Install dependencies:
+```bash
+npm install
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
+3. Set up environment variables:
+Create a `.env` file in the root directory and add your Firebase configuration:
+```env
+VITE_FIREBASE_API_KEY=your_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+4. Start the development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The application will be available at `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Building for Production
 
-**Use GitHub Codespaces**
+```bash
+npm run build
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+The built files will be in the `dist` directory.
 
-## What technologies are used for this project?
+## Project Structure
 
-This project is built with:
+```
+src/
+├── components/          # Reusable UI components
+│   ├── ui/             # Base UI components (shadcn/ui)
+│   ├── Navbar.tsx      # Navigation component
+│   ├── ProductCard.tsx # Product display component
+│   └── ...
+├── contexts/           # React Context providers
+├── hooks/              # Custom React hooks
+├── lib/                # Utility functions and configurations
+├── pages/              # Page components
+└── styles/             # Global styles and Tailwind config
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Key Features
 
-## How can I deploy this project?
+### AI Body Scanning
+- Uses device camera for real-time body measurement
+- Processes data locally for privacy
+- Provides accurate size recommendations
 
-Simply open [Lovable](https://lovable.dev/projects/a15690bf-aff6-4499-b6f1-16039441784d) and click on Share -> Publish.
+### Product Catalog
+- Responsive grid layout
+- Advanced filtering and search
+- Real-time inventory management
+- Wishlist functionality
 
-## Can I connect a custom domain to my Lovable project?
+### User Experience
+- Smooth animations and transitions
+- Mobile-first responsive design
+- Dark theme with custom color palette
+- Accessibility-focused design
 
-Yes, you can!
+### Shopping Features
+- Shopping cart with persistent storage
+- User authentication with Firebase
+- Order history and tracking
+- Customer support chat
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Design System
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+RARITONE uses a custom design system with:
+- **Primary Colors**: Custom green palette (#697565, #3C3D37, #181C14, #ECDFCC)
+- **Typography**: Inter and Poppins font families
+- **Spacing**: 8px grid system
+- **Components**: Consistent design patterns across all UI elements
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is proprietary software owned by RARITONE Fashion Technologies Pvt. Ltd.
+
+## Contact
+
+- **Website**: [raritone.in](https://raritone.in)
+- **Email**: hello@raritone.in
+- **Support**: support@raritone.in
+- **Phone**: +91 98765 43210
+
+---
+
+© 2025 RARITONE Fashion Technologies Pvt. Ltd. All rights reserved.
