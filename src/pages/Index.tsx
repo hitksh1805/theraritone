@@ -44,7 +44,34 @@ const Index = () => {
     }
   }, []);
 
-  // UPDATED: Use the same product data as catalog
+  // Create floating particles
+  useEffect(() => {
+    const createParticle = () => {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.width = Math.random() * 4 + 2 + 'px';
+      particle.style.height = particle.style.width;
+      particle.style.animationDuration = Math.random() * 10 + 15 + 's';
+      particle.style.animationDelay = Math.random() * 5 + 's';
+      
+      const particlesContainer = document.querySelector('.particles');
+      if (particlesContainer) {
+        particlesContainer.appendChild(particle);
+        
+        setTimeout(() => {
+          if (particle.parentNode) {
+            particle.parentNode.removeChild(particle);
+          }
+        }, 25000);
+      }
+    };
+
+    const interval = setInterval(createParticle, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Product data
   const catalogProducts = [
     {
       id: '1',
@@ -93,7 +120,7 @@ const Index = () => {
       price: 434.13,
       imageURL: 'https://static.wixstatic.com/media/3903b5_4fde7750734f4f188841c462d77d27bb~mv2.jpg/v1/fill/w_500,h_667,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/3903b5_4fde7750734f4f188841c462d77d27bb~mv2.jpg',
       category: 'Tops',
-      stock: 0, // Out of stock
+      stock: 0,
       tags: ['Tshirt', 'luxury', 'comfort'],
       sizes: ['XS', 'S', 'M', 'L'],
       createdAt: new Date(),
@@ -116,7 +143,7 @@ const Index = () => {
     }
   ];
 
-  // UPDATED: New Arrivals - Get latest 4 products from catalog
+  // New Arrivals
   const newArrivals = catalogProducts
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     .slice(0, 4)
@@ -128,7 +155,7 @@ const Index = () => {
       tag: product.stock === 0 ? 'Out of Stock' : 'New'
     }));
 
-  // UPDATED: Categories - Use actual categories from catalog products
+  // Categories
   const categories = [
     { 
       name: "T-Shirts", 
@@ -156,7 +183,7 @@ const Index = () => {
     }
   ];
 
-  // UPDATED: Best Picks - Get top 3 highest rated products from catalog
+  // Best Picks
   const bestPicks = catalogProducts
     .sort((a, b) => (b.rating || 0) - (a.rating || 0))
     .slice(0, 3)
@@ -180,7 +207,7 @@ const Index = () => {
     navigate(`/catalog?category=${encodeURIComponent(category)}`);
   };
 
-  // Handle Best Picks product click - opens modal
+  // Handle Best Picks product click
   const handleBestPickClick = (product: any) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
@@ -211,16 +238,14 @@ const Index = () => {
         return;
       }
     } else {
-      // For non-authenticated users, add to localStorage
       addToLocalCart(cartItem);
     }
 
-    // Show cart toast
     setCartToastItem(cartItem);
     setShowCartToast(true);
   };
 
-  // Handle add to wishlist - UPDATED: Works for all users
+  // Handle add to wishlist
   const handleAddToWishlist = (productId: string) => {
     const currentWishlist = [...wishlist];
     if (!currentWishlist.includes(productId)) {
@@ -228,7 +253,6 @@ const Index = () => {
       setWishlist(currentWishlist);
       localStorage.setItem('wishlist', JSON.stringify(currentWishlist));
       
-      // Dispatch custom event to update navbar count
       window.dispatchEvent(new Event('wishlistUpdated'));
       
       showToast({
@@ -237,12 +261,10 @@ const Index = () => {
         message: 'Item has been saved to your wishlist!'
       });
     } else {
-      // Remove from wishlist
       const updatedWishlist = currentWishlist.filter(id => id !== productId);
       setWishlist(updatedWishlist);
       localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
       
-      // Dispatch custom event to update navbar count
       window.dispatchEvent(new Event('wishlistUpdated'));
       
       showToast({
@@ -260,79 +282,76 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen text-[rgb(236,223,204)]" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
-      {/* Navigation - No page title or back button for homepage */}
+    <div className="min-h-screen text-[rgb(236,223,204)]" style={{ background: 'linear-gradient(135deg, #2a2d2a 0%, #1a1d1a 100%)' }}>
+      {/* Navigation */}
       <Navbar 
         onSearchOpen={() => setIsSearchOpen(true)}
         onCartOpen={() => setIsCartOpen(true)}
       />
 
-      {/* RESPONSIVE Hero Section */}
+      {/* GLASSMORPHISM HERO SECTION */}
       <div className="relative min-h-screen overflow-hidden flex items-center justify-center">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1441986300917-64674bd600d8"
-            alt="Fashion Model in RARITONE Collection"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0" style={{ backgroundColor: 'rgba(24, 28, 20, 0.5)' }} />
-        </div>
+        {/* Floating Particles */}
+        <div className="particles"></div>
+        
+        {/* Background Gradient */}
+        <div className="absolute inset-0 hero-gradient" />
 
-        {/* RESPONSIVE Logo and Content */}
+        {/* Hero Content with Glass Effect */}
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-8">
-          <div className="mb-8">
-            <img
-              src="/IMG-20250305-WA0003-removebg-preview.png"
-              alt="RARITONE"
-              className="mx-auto w-full max-w-xs sm:max-w-2xl h-auto"
-            />
+          <div className="glass-strong rounded-3xl p-8 sm:p-12 lg:p-16 transition-glass hover-glass">
+            <div className="mb-8">
+              <img
+                src="/IMG-20250305-WA0003-removebg-preview.png"
+                alt="RARITONE"
+                className="mx-auto w-full max-w-xs sm:max-w-2xl h-auto float-animation"
+              />
+            </div>
+
+            <p className="text-subtitle font-light mb-16 text-[rgb(236,223,204)] opacity-90">
+              Fashion Meets Technology
+            </p>
+
+            {/* Action Buttons with Glass Effect */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-16">
+              <button
+                className="btn-glass font-medium flex items-center space-x-3 rounded-full justify-center w-full max-w-xs sm:min-w-[220px] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base"
+                onClick={() => navigate('/scan')}
+              >
+                <Camera size={isMobile ? 18 : 20} />
+                <span>Start Body Scan</span>
+              </button>
+              
+              <button
+                className="btn-glass-primary font-medium flex items-center space-x-3 rounded-full justify-center w-full max-w-xs sm:min-w-[220px] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base"
+                onClick={() => navigate('/catalog')}
+              >
+                <ShoppingBag size={isMobile ? 18 : 20} />
+                <span>Browse Collection</span>
+              </button>
+            </div>
+
+            {/* Notice Text */}
+            <p className="max-w-md mx-auto leading-relaxed text-xs sm:text-sm px-4 opacity-70">
+              This site uses webcam access to enable AI-powered try-ons. Your camera data is never stored or shared.
+            </p>
           </div>
-
-          <p className="font-light mb-16 text-[rgb(236,223,204)] text-lg sm:text-xl">
-            Fashion Meets Technology
-          </p>
-
-          {/* RESPONSIVE Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-16">
-            <button
-              className="bg-transparent text-[rgb(236,223,204)] border border-[rgb(105,117,101)] font-medium hover:bg-[rgba(105,117,101,0.3)] flex items-center space-x-3 rounded-full justify-center transition-all duration-200 w-full max-w-xs sm:min-w-[220px] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base"
-              onClick={() => navigate('/scan')}
-            >
-              <Camera size={isMobile ? 18 : 20} />
-              <span>Start Body Scan</span>
-            </button>
-            
-            <button
-              className="bg-transparent text-[rgb(236,223,204)] border border-[rgb(105,117,101)] font-medium hover:bg-[rgba(105,117,101,0.3)] flex items-center space-x-3 rounded-full justify-center transition-all duration-200 w-full max-w-xs sm:min-w-[220px] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base"
-              onClick={() => navigate('/catalog')}
-            >
-              <ShoppingBag size={isMobile ? 18 : 20} />
-              <span>Browse Collection</span>
-            </button>
-          </div>
-
-          {/* RESPONSIVE Notice Text */}
-          <p className="max-w-md mx-auto leading-relaxed text-xs sm:text-sm px-4" style={{ color: '#ECDFCC' }}>
-            This site uses webcam access to enable AI-powered try-ons. Your camera data is never stored or shared.
-          </p>
         </div>
       </div>
 
-      {/* FIXED GRID: New Arrivals Section */}
-      <section className="py-12 sm:py-20" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
+      {/* NEW ARRIVALS SECTION */}
+      <section className="py-12 sm:py-20" style={{ background: 'linear-gradient(135deg, #1a1d1a 0%, #2a2d2a 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-16">
-            <h2 className="font-light mb-4 text-[rgb(236,223,204)] flex items-center justify-center text-2xl sm:text-3xl lg:text-4xl">
+            <h2 className="text-hero font-light mb-4 text-[rgb(236,223,204)] flex items-center justify-center">
               <Sparkles className="mr-3" size={isMobile ? 24 : 32} />
               New Arrivals
             </h2>
-            <p className="text-[rgb(105,117,101)] max-w-2xl mx-auto text-sm sm:text-base px-4">
+            <p className="text-subtitle text-[rgb(105,117,101)] max-w-2xl mx-auto px-4">
               Discover our latest collections, meticulously crafted and designed for the modern luxury connoisseur.
             </p>
           </div>
 
-          {/* FIXED RESPONSIVE GRID */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {newArrivals.map((item) => (
               <div
@@ -340,7 +359,7 @@ const Index = () => {
                 className="group cursor-pointer"
                 onClick={() => navigate('/catalog')}
               >
-                <div className="bg-[rgb(24,28,20)] rounded-lg shadow-md border border-[rgb(105,117,101)] overflow-hidden">
+                <div className="glass-card rounded-2xl overflow-hidden transition-glass hover-glass">
                   <div className="aspect-[3/4] relative overflow-hidden">
                     <img
                       src={item.image}
@@ -348,22 +367,22 @@ const Index = () => {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute top-3 left-3">
-                      <span className={`font-medium rounded px-2 py-1 text-xs ${
+                      <span className={`font-medium rounded-full px-3 py-1 text-xs backdrop-blur-md ${
                         item.tag === 'Out of Stock' 
-                          ? 'bg-red-500 text-white' 
-                          : 'bg-[rgb(236,223,204)] text-[rgb(24,28,20)]'
+                          ? 'bg-red-500/80 text-white' 
+                          : 'bg-white/20 text-white border border-white/30'
                       }`}>
                         {item.tag}
                       </span>
                     </div>
                     
-                    {/* WISHLIST HEART BUTTON - Available for all users */}
+                    {/* Wishlist Heart Button */}
                     <button
                       onClick={(e) => quickAddToWishlist(e, item.id.toString())}
-                      className={`absolute top-3 right-3 p-2 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100 ${
+                      className={`absolute top-3 right-3 p-2 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100 backdrop-blur-md ${
                         wishlist.includes(item.id.toString())
-                          ? 'bg-red-500 text-white'
-                          : 'bg-black/50 text-white hover:bg-black/70'
+                          ? 'bg-red-500/80 text-white'
+                          : 'bg-white/20 text-white hover:bg-white/30 border border-white/30'
                       }`}
                     >
                       <Heart 
@@ -387,20 +406,19 @@ const Index = () => {
         </div>
       </section>
 
-      {/* FIXED GRID: Categories Section */}
-      <section className="py-12 sm:py-20" style={{ backgroundColor: 'rgb(24, 28, 20)' }}>
+      {/* CATEGORIES SECTION */}
+      <section className="py-12 sm:py-20" style={{ background: 'linear-gradient(135deg, #2a2d2a 0%, #1a1d1a 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-16">
-            <h2 className="font-light mb-4 text-[rgb(236,223,204)] flex items-center justify-center text-2xl sm:text-3xl lg:text-4xl">
+            <h2 className="text-hero font-light mb-4 text-[rgb(236,223,204)] flex items-center justify-center">
               <TrendingUp className="mr-3" size={isMobile ? 24 : 32} />
               Shop by Category
             </h2>
-            <p className="text-[rgb(105,117,101)] max-w-2xl mx-auto text-sm sm:text-base px-4">
+            <p className="text-subtitle text-[rgb(105,117,101)] max-w-2xl mx-auto px-4">
               Explore our diverse range of fashion categories, each carefully curated for your unique style.
             </p>
           </div>
 
-          {/* FIXED RESPONSIVE GRID */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {categories.map((category) => (
               <div
@@ -408,14 +426,14 @@ const Index = () => {
                 className="group cursor-pointer"
                 onClick={() => handleCategoryClick(category.category)}
               >
-                <div className="bg-[rgb(60,61,55)] rounded-lg shadow-md border border-[rgb(105,117,101)] overflow-hidden">
+                <div className="glass-card rounded-2xl overflow-hidden transition-glass hover-glass">
                   <div className="aspect-square relative overflow-hidden">
                     <img
                       src={category.image}
                       alt={category.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   </div>
                   <div className="text-center p-4">
                     <h3 className="font-medium mb-1 text-[rgb(236,223,204)] text-base sm:text-lg">
@@ -432,20 +450,19 @@ const Index = () => {
         </div>
       </section>
 
-      {/* FIXED GRID: Best Picks Section */}
-      <section className="py-12 sm:py-20" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
+      {/* BEST PICKS SECTION */}
+      <section className="py-12 sm:py-20" style={{ background: 'linear-gradient(135deg, #1a1d1a 0%, #2a2d2a 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-16">
-            <h2 className="font-light mb-4 text-[rgb(236,223,204)] flex items-center justify-center text-2xl sm:text-3xl lg:text-4xl">
+            <h2 className="text-hero font-light mb-4 text-[rgb(236,223,204)] flex items-center justify-center">
               <Star className="mr-3" size={isMobile ? 24 : 32} />
               Best Picks
             </h2>
-            <p className="text-[rgb(105,117,101)] max-w-2xl mx-auto text-sm sm:text-base px-4">
+            <p className="text-subtitle text-[rgb(105,117,101)] max-w-2xl mx-auto px-4">
               Our most popular items, loved by customers worldwide for their exceptional quality and style.
             </p>
           </div>
 
-          {/* FIXED RESPONSIVE GRID */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {bestPicks.map((item) => (
               <div
@@ -453,25 +470,25 @@ const Index = () => {
                 className="group cursor-pointer"
                 onClick={() => handleBestPickClick(item)}
               >
-                <div className="bg-[rgb(24,28,20)] rounded-lg shadow-md border border-[rgb(105,117,101)] overflow-hidden">
+                <div className="glass-card rounded-2xl overflow-hidden transition-glass hover-glass">
                   <div className="aspect-[3/4] relative overflow-hidden">
                     <img
                       src={item.image}
                       alt={item.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     
-                    {/* WISHLIST HEART BUTTON - Available for all users */}
+                    {/* Wishlist Heart Button */}
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         handleAddToWishlist(item.id);
                       }}
-                      className={`absolute top-4 right-4 p-2 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100 ${
+                      className={`absolute top-4 right-4 p-2 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100 backdrop-blur-md ${
                         wishlist.includes(item.id)
-                          ? 'bg-red-500 text-white'
-                          : 'bg-black/50 text-white hover:bg-black/70'
+                          ? 'bg-red-500/80 text-white'
+                          : 'bg-white/20 text-white hover:bg-white/30 border border-white/30'
                       }`}
                     >
                       <Heart 
@@ -503,65 +520,67 @@ const Index = () => {
         </div>
       </section>
 
-      {/* IMPROVED Footer Section */}
-      <footer className="py-8 sm:py-16 border-t border-[rgb(105,117,101)]" style={{ backgroundColor: 'rgb(24, 28, 20)' }}>
+      {/* FOOTER SECTION */}
+      <footer className="py-8 sm:py-16 border-t border-white/10" style={{ background: 'linear-gradient(135deg, #2a2d2a 0%, #1a1d1a 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Brand Section */}
-            <div className="lg:col-span-2">
-              <img
-                src="/IMG-20250305-WA0003-removebg-preview.png"
-                alt="RARITONE"
-                className="h-16 sm:h-20 w-auto mb-4"
-              />
-              <p className="text-[rgb(105,117,101)] max-w-md leading-relaxed text-sm sm:text-base">
-                Revolutionizing fashion with AI-powered body scanning technology. 
-                Experience perfect fit and personalized style recommendations across India.
-              </p>
-            </div>
+          <div className="glass-card rounded-2xl p-6 sm:p-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {/* Brand Section */}
+              <div className="lg:col-span-2">
+                <img
+                  src="/IMG-20250305-WA0003-removebg-preview.png"
+                  alt="RARITONE"
+                  className="h-16 sm:h-20 w-auto mb-4"
+                />
+                <p className="text-[rgb(105,117,101)] max-w-md leading-relaxed text-sm sm:text-base">
+                  Revolutionizing fashion with AI-powered body scanning technology. 
+                  Experience perfect fit and personalized style recommendations across India.
+                </p>
+              </div>
 
-            {/* Quick Links */}
-            <div>
-              <h3 className="font-semibold text-[rgb(236,223,204)] mb-4 text-base sm:text-lg">Quick Links</h3>
-              <ul className="space-y-2">
-                <li><a href="/shipping" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] text-sm sm:text-base transition-colors">Shipping & Delivery</a></li>
-                <li><a href="/returns" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] text-sm sm:text-base transition-colors">Returns & Exchanges</a></li>
-                <li><a href="/faqs" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] text-sm sm:text-base transition-colors">FAQs</a></li>
-                <li><a href="/terms" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] text-sm sm:text-base transition-colors">Terms & Conditions</a></li>
-                <li><a href="/contact" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] text-sm sm:text-base transition-colors">Contact Us</a></li>
-              </ul>
-            </div>
+              {/* Quick Links */}
+              <div>
+                <h3 className="font-semibold text-[rgb(236,223,204)] mb-4 text-base sm:text-lg">Quick Links</h3>
+                <ul className="space-y-2">
+                  <li><a href="/shipping" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] text-sm sm:text-base transition-colors">Shipping & Delivery</a></li>
+                  <li><a href="/returns" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] text-sm sm:text-base transition-colors">Returns & Exchanges</a></li>
+                  <li><a href="/faqs" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] text-sm sm:text-base transition-colors">FAQs</a></li>
+                  <li><a href="/terms" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] text-sm sm:text-base transition-colors">Terms & Conditions</a></li>
+                  <li><a href="/contact" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] text-sm sm:text-base transition-colors">Contact Us</a></li>
+                </ul>
+              </div>
 
-            {/* Contact Info */}
-            <div>
-              <h3 className="font-semibold text-[rgb(236,223,204)] mb-4 text-base sm:text-lg">Contact</h3>
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <Mail size={16} className="text-[rgb(105,117,101)]" />
-                  <span className="text-[rgb(105,117,101)] text-sm sm:text-base">
-                    hello@raritone.in
-                  </span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Phone size={16} className="text-[rgb(105,117,101)]" />
-                  <span className="text-[rgb(105,117,101)] text-sm sm:text-base">
-                    +91 98765 43210
-                  </span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <MapPin size={16} className="text-[rgb(105,117,101)]" />
-                  <span className="text-[rgb(105,117,101)] text-sm sm:text-base">
-                    Mumbai, India
-                  </span>
+              {/* Contact Info */}
+              <div>
+                <h3 className="font-semibold text-[rgb(236,223,204)] mb-4 text-base sm:text-lg">Contact</h3>
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-3">
+                    <Mail size={16} className="text-[rgb(105,117,101)]" />
+                    <span className="text-[rgb(105,117,101)] text-sm sm:text-base">
+                      hello@raritone.in
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <Phone size={16} className="text-[rgb(105,117,101)]" />
+                    <span className="text-[rgb(105,117,101)] text-sm sm:text-base">
+                      +91 98765 43210
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <MapPin size={16} className="text-[rgb(105,117,101)]" />
+                    <span className="text-[rgb(105,117,101)] text-sm sm:text-base">
+                      Mumbai, India
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="border-t border-[rgb(105,117,101)] mt-8 sm:mt-12 pt-6 sm:pt-8 text-center">
-            <p className="text-[rgb(105,117,101)] text-xs sm:text-sm">
-              © 2025 RARITONE. All rights reserved. | Powered by AI Fashion Technology | Made in India
-            </p>
+            <div className="border-t border-white/10 mt-8 sm:mt-12 pt-6 sm:pt-8 text-center">
+              <p className="text-[rgb(105,117,101)] text-xs sm:text-sm">
+                © 2025 RARITONE. All rights reserved. | Powered by AI Fashion Technology | Made in India
+              </p>
+            </div>
           </div>
         </div>
       </footer>
