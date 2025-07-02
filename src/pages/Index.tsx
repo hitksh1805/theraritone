@@ -289,7 +289,7 @@ const Index = () => {
         onCartOpen={() => setIsCartOpen(true)}
       />
 
-      {/* GLASSMORPHISM HERO SECTION */}
+      {/* GLASSMORPHISM HERO SECTION WITH BUTTERFLY */}
       <div className="relative min-h-screen overflow-hidden flex items-center justify-center">
         {/* Floating Particles */}
         <div className="particles"></div>
@@ -299,8 +299,76 @@ const Index = () => {
 
         {/* Hero Content with Glass Effect */}
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-8">
-          <div className="glass-strong rounded-3xl p-8 sm:p-12 lg:p-16 transition-glass hover-glass">
-            <div className="mb-8">
+          <div className="glass-strong rounded-3xl p-8 sm:p-12 lg:p-16 transition-glass hover-glass relative">
+            
+            {/* ANIMATED WHITE BUTTERFLY BEHIND LOGO */}
+            <div className="butterfly-container">
+              <svg 
+                className="butterfly-svg" 
+                viewBox="0 0 120 80" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {/* Butterfly Body */}
+                <ellipse cx="60" cy="40" rx="2" ry="25" fill="rgba(255, 255, 255, 0.6)" />
+                
+                {/* Left Wing (Top) */}
+                <path 
+                  d="M45 25 C35 15, 25 20, 30 35 C35 45, 45 40, 50 30 Z" 
+                  fill="rgba(255, 255, 255, 0.4)" 
+                  stroke="rgba(255, 255, 255, 0.6)" 
+                  strokeWidth="0.5"
+                />
+                
+                {/* Right Wing (Top) */}
+                <path 
+                  d="M75 25 C85 15, 95 20, 90 35 C85 45, 75 40, 70 30 Z" 
+                  fill="rgba(255, 255, 255, 0.4)" 
+                  stroke="rgba(255, 255, 255, 0.6)" 
+                  strokeWidth="0.5"
+                />
+                
+                {/* Left Wing (Bottom) */}
+                <path 
+                  d="M50 45 C40 50, 35 60, 45 65 C55 60, 55 50, 52 45 Z" 
+                  fill="rgba(255, 255, 255, 0.3)" 
+                  stroke="rgba(255, 255, 255, 0.5)" 
+                  strokeWidth="0.5"
+                />
+                
+                {/* Right Wing (Bottom) */}
+                <path 
+                  d="M70 45 C80 50, 85 60, 75 65 C65 60, 65 50, 68 45 Z" 
+                  fill="rgba(255, 255, 255, 0.3)" 
+                  stroke="rgba(255, 255, 255, 0.5)" 
+                  strokeWidth="0.5"
+                />
+                
+                {/* Wing Details */}
+                <circle cx="40" cy="30" r="3" fill="rgba(255, 255, 255, 0.2)" />
+                <circle cx="80" cy="30" r="3" fill="rgba(255, 255, 255, 0.2)" />
+                <circle cx="45" cy="55" r="2" fill="rgba(255, 255, 255, 0.2)" />
+                <circle cx="75" cy="55" r="2" fill="rgba(255, 255, 255, 0.2)" />
+                
+                {/* Antennae */}
+                <path 
+                  d="M58 18 Q55 12, 52 15" 
+                  stroke="rgba(255, 255, 255, 0.6)" 
+                  strokeWidth="1" 
+                  fill="none"
+                />
+                <path 
+                  d="M62 18 Q65 12, 68 15" 
+                  stroke="rgba(255, 255, 255, 0.6)" 
+                  strokeWidth="1" 
+                  fill="none"
+                />
+                <circle cx="52" cy="15" r="1" fill="rgba(255, 255, 255, 0.6)" />
+                <circle cx="68" cy="15" r="1" fill="rgba(255, 255, 255, 0.6)" />
+              </svg>
+            </div>
+
+            <div className="relative z-10 mb-8">
               <img
                 src="/IMG-20250305-WA0003-removebg-preview.png"
                 alt="RARITONE"

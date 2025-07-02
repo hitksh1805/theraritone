@@ -140,6 +140,52 @@
   box-shadow: 0 0 20px rgba(236, 223, 204, 0.3);
 }
 
+/* BUTTERFLY ANIMATION */
+@keyframes butterfly-wings {
+  0%, 100% { 
+    transform: rotateX(0deg) rotateY(0deg) scale(1);
+  }
+  25% { 
+    transform: rotateX(-15deg) rotateY(5deg) scale(1.02);
+  }
+  50% { 
+    transform: rotateX(0deg) rotateY(0deg) scale(1.05);
+  }
+  75% { 
+    transform: rotateX(15deg) rotateY(-5deg) scale(1.02);
+  }
+}
+
+@keyframes butterfly-float {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  33% { 
+    transform: translateY(-8px) translateX(4px) rotate(1deg);
+  }
+  66% { 
+    transform: translateY(4px) translateX(-2px) rotate(-1deg);
+  }
+}
+
+.butterfly-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  pointer-events: none;
+  animation: butterfly-float 8s ease-in-out infinite;
+}
+
+.butterfly-svg {
+  width: 120px;
+  height: 80px;
+  opacity: 0.3;
+  filter: blur(0.5px) drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+  animation: butterfly-wings 3s ease-in-out infinite;
+}
+
 /* SUBTLE ANIMATIONS */
 @keyframes float {
   0%, 100% { 
@@ -196,6 +242,11 @@
   .glass-card {
     backdrop-filter: blur(15px) saturate(130%);
     -webkit-backdrop-filter: blur(15px) saturate(130%);
+  }
+  
+  .butterfly-svg {
+    width: 80px;
+    height: 60px;
   }
 }
 
