@@ -256,7 +256,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen text-[rgb(236,223,204)]" style={{ background: 'linear-gradient(135deg, #1a2f1a 0%, #0d1a0d 100%)' }}>
+    <div className="min-h-screen text-[rgb(236,223,204)]" style={{ background: 'linear-gradient(135deg, #2a2d2a 0%, #1a1d1a 100%)' }}>
       {/* Navigation */}
       <Navbar 
         onSearchOpen={() => setIsSearchOpen(true)}
@@ -269,45 +269,72 @@ const Index = () => {
         <ButterflyScene />
         
         {/* Dark gradient overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50" style={{ zIndex: 2 }} />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" style={{ zIndex: 2 }} />
 
-        {/* Hero Content with Enhanced Glass Effect */}
+        {/* Hero Content - NO RECTANGLE BACKGROUND */}
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-8" style={{ zIndex: 3 }}>
-          <div className="glass-strong rounded-3xl p-8 sm:p-12 lg:p-16 transition-glass hover-glass backdrop-blur-xl bg-white/5 border border-white/10">
+          <div className="p-8 sm:p-12 lg:p-16">
             <div className="mb-8">
               <img
                 src="/IMG-20250305-WA0003-removebg-preview.png"
                 alt="RARITONE"
-                className="mx-auto w-full max-w-xs sm:max-w-2xl h-auto float-animation drop-shadow-2xl"
-                style={{ filter: 'drop-shadow(0 0 30px rgba(255,255,255,0.3))' }}
+                className="mx-auto w-full max-w-xs sm:max-w-2xl h-auto float-animation"
+                style={{ 
+                  filter: 'drop-shadow(0 0 40px rgba(255,255,255,0.8)) brightness(1.2)',
+                  textShadow: '0 0 20px rgba(255,255,255,0.5)'
+                }}
               />
             </div>
 
-            <p className="text-subtitle font-light mb-16 text-[rgb(236,223,204)] opacity-90">
+            <p className="text-subtitle font-light mb-16 text-[rgb(236,223,204)] opacity-90" 
+               style={{ 
+                 textShadow: '0 2px 10px rgba(0,0,0,0.8)',
+                 filter: 'brightness(1.2)'
+               }}>
               Fashion Meets Technology
             </p>
 
-            {/* Action Buttons with Enhanced Glass Effect */}
+            {/* Action Buttons with Enhanced Visibility */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-16">
               <button
-                className="btn-glass font-medium flex items-center space-x-3 rounded-full justify-center w-full max-w-xs sm:min-w-[220px] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base backdrop-blur-xl bg-white/10 border border-white/20 hover:bg-white/20 transition-all duration-300"
+                className="btn-glass font-medium flex items-center space-x-3 rounded-full justify-center w-full max-w-xs sm:min-w-[220px] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base"
                 onClick={() => navigate('/scan')}
+                style={{
+                  background: 'rgba(236, 223, 204, 0.15)',
+                  border: '1px solid rgba(236, 223, 204, 0.4)',
+                  backdropFilter: 'blur(20px)',
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
+                }}
               >
                 <Camera size={isMobile ? 18 : 20} />
                 <span>Start Body Scan</span>
               </button>
               
               <button
-                className="btn-glass-primary font-medium flex items-center space-x-3 rounded-full justify-center w-full max-w-xs sm:min-w-[220px] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base backdrop-blur-xl bg-white/90 text-black hover:bg-white transition-all duration-300"
+                className="btn-glass-primary font-medium flex items-center space-x-3 rounded-full justify-center w-full max-w-xs sm:min-w-[220px] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base"
                 onClick={() => navigate('/catalog')}
+                style={{
+                  background: 'rgba(236, 223, 204, 0.95)',
+                  color: 'rgb(24, 28, 20)',
+                  border: '1px solid rgba(236, 223, 204, 1)',
+                  backdropFilter: 'blur(20px)',
+                  boxShadow: '0 8px 32px rgba(236, 223, 204, 0.3)'
+                }}
               >
                 <ShoppingBag size={isMobile ? 18 : 20} />
                 <span>Browse Collection</span>
               </button>
             </div>
 
-            {/* Notice Text */}
-            <p className="max-w-md mx-auto leading-relaxed text-xs sm:text-sm px-4 opacity-70">
+            {/* Notice Text with Better Visibility */}
+            <p className="max-w-md mx-auto leading-relaxed text-xs sm:text-sm px-4 opacity-80"
+               style={{ 
+                 textShadow: '0 2px 8px rgba(0,0,0,0.8)',
+                 background: 'rgba(0,0,0,0.3)',
+                 padding: '8px 16px',
+                 borderRadius: '8px',
+                 backdropFilter: 'blur(10px)'
+               }}>
               This site uses webcam access to enable AI-powered try-ons. Your camera data is never stored or shared.
             </p>
           </div>
@@ -315,7 +342,7 @@ const Index = () => {
       </div>
 
       {/* NEW ARRIVALS SECTION */}
-      <section className="py-12 sm:py-20" style={{ background: 'linear-gradient(135deg, #0d1a0d 0%, #1a2f1a 100%)' }}>
+      <section className="py-12 sm:py-20" style={{ background: 'linear-gradient(135deg, #1a1d1a 0%, #2a2d2a 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-16">
             <h2 className="text-hero font-light mb-4 text-[rgb(236,223,204)] flex items-center justify-center">
@@ -334,7 +361,7 @@ const Index = () => {
                 className="group cursor-pointer"
                 onClick={() => navigate('/catalog')}
               >
-                <div className="glass-card rounded-2xl overflow-hidden transition-glass hover-glass backdrop-blur-xl bg-white/5 border border-white/10">
+                <div className="glass-card rounded-2xl overflow-hidden transition-glass hover-glass">
                   <div className="aspect-[3/4] relative overflow-hidden">
                     <img
                       src={item.image}
@@ -382,7 +409,7 @@ const Index = () => {
       </section>
 
       {/* CATEGORIES SECTION */}
-      <section className="py-12 sm:py-20" style={{ background: 'linear-gradient(135deg, #1a2f1a 0%, #0d1a0d 100%)' }}>
+      <section className="py-12 sm:py-20" style={{ background: 'linear-gradient(135deg, #2a2d2a 0%, #1a1d1a 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-16">
             <h2 className="text-hero font-light mb-4 text-[rgb(236,223,204)] flex items-center justify-center">
@@ -401,7 +428,7 @@ const Index = () => {
                 className="group cursor-pointer"
                 onClick={() => handleCategoryClick(category.category)}
               >
-                <div className="glass-card rounded-2xl overflow-hidden transition-glass hover-glass backdrop-blur-xl bg-white/5 border border-white/10">
+                <div className="glass-card rounded-2xl overflow-hidden transition-glass hover-glass">
                   <div className="aspect-square relative overflow-hidden">
                     <img
                       src={category.image}
@@ -426,7 +453,7 @@ const Index = () => {
       </section>
 
       {/* BEST PICKS SECTION */}
-      <section className="py-12 sm:py-20" style={{ background: 'linear-gradient(135deg, #0d1a0d 0%, #1a2f1a 100%)' }}>
+      <section className="py-12 sm:py-20" style={{ background: 'linear-gradient(135deg, #1a1d1a 0%, #2a2d2a 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-16">
             <h2 className="text-hero font-light mb-4 text-[rgb(236,223,204)] flex items-center justify-center">
@@ -445,7 +472,7 @@ const Index = () => {
                 className="group cursor-pointer"
                 onClick={() => handleBestPickClick(item)}
               >
-                <div className="glass-card rounded-2xl overflow-hidden transition-glass hover-glass backdrop-blur-xl bg-white/5 border border-white/10">
+                <div className="glass-card rounded-2xl overflow-hidden transition-glass hover-glass">
                   <div className="aspect-[3/4] relative overflow-hidden">
                     <img
                       src={item.image}
@@ -496,9 +523,9 @@ const Index = () => {
       </section>
 
       {/* FOOTER SECTION */}
-      <footer className="py-8 sm:py-16 border-t border-white/10" style={{ background: 'linear-gradient(135deg, #1a2f1a 0%, #0d1a0d 100%)' }}>
+      <footer className="py-8 sm:py-16 border-t border-white/10" style={{ background: 'linear-gradient(135deg, #2a2d2a 0%, #1a1d1a 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="glass-card rounded-2xl p-6 sm:p-8 backdrop-blur-xl bg-white/5 border border-white/10">
+          <div className="glass-card rounded-2xl p-6 sm:p-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {/* Brand Section */}
               <div className="lg:col-span-2">

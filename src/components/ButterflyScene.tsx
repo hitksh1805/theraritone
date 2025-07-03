@@ -27,91 +27,96 @@ const ButterflyScene: React.FC = () => {
     
     mountRef.current.appendChild(renderer.domElement);
 
-    // Lighting setup
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    // Enhanced lighting setup for better visibility
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
     scene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
     directionalLight.position.set(10, 10, 5);
     directionalLight.castShadow = true;
     scene.add(directionalLight);
 
-    const pointLight1 = new THREE.PointLight(0xff9999, 0.5, 100);
+    const pointLight1 = new THREE.PointLight(0xffffff, 0.8, 100);
     pointLight1.position.set(-10, 5, 10);
     scene.add(pointLight1);
 
-    const pointLight2 = new THREE.PointLight(0x9999ff, 0.5, 100);
+    const pointLight2 = new THREE.PointLight(0xffffff, 0.8, 100);
     pointLight2.position.set(10, -5, 10);
     scene.add(pointLight2);
 
-    // Create butterfly
+    // Create MUCH BIGGER butterfly
     const butterfly = new THREE.Group();
     
-    // Butterfly body
-    const bodyGeometry = new THREE.CylinderGeometry(0.05, 0.1, 2, 8);
+    // Butterfly body - bigger
+    const bodyGeometry = new THREE.CylinderGeometry(0.15, 0.25, 4, 8);
     const bodyMaterial = new THREE.MeshPhongMaterial({ 
-      color: 0x333333,
-      shininess: 100 
+      color: 0xffffff,
+      shininess: 100,
+      transparent: true,
+      opacity: 0.9
     });
     const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
     butterfly.add(body);
 
-    // Butterfly wings with iridescent material
-    const wingGeometry = new THREE.PlaneGeometry(1.5, 2);
+    // MUCH BIGGER butterfly wings with enhanced iridescent material
+    const wingGeometry = new THREE.PlaneGeometry(4, 5); // Much bigger wings
     const wingMaterial = new THREE.MeshPhongMaterial({
       color: 0xffffff,
       transparent: true,
-      opacity: 0.9,
-      shininess: 100,
-      specular: 0x9999ff,
-      side: THREE.DoubleSide
+      opacity: 0.95,
+      shininess: 150,
+      specular: 0xccccff,
+      side: THREE.DoubleSide,
+      emissive: 0x111111
     });
 
-    // Left wing
+    // Left wing - bigger
     const leftWing = new THREE.Mesh(wingGeometry, wingMaterial);
-    leftWing.position.set(-0.8, 0, 0);
+    leftWing.position.set(-2.2, 0, 0);
     leftWing.rotation.z = Math.PI / 6;
     butterfly.add(leftWing);
 
-    // Right wing
+    // Right wing - bigger
     const rightWing = new THREE.Mesh(wingGeometry, wingMaterial);
-    rightWing.position.set(0.8, 0, 0);
+    rightWing.position.set(2.2, 0, 0);
     rightWing.rotation.z = -Math.PI / 6;
     butterfly.add(rightWing);
 
-    // Lower wings
-    const lowerWingGeometry = new THREE.PlaneGeometry(1, 1.2);
+    // Lower wings - bigger
+    const lowerWingGeometry = new THREE.PlaneGeometry(3, 3.5);
     const leftLowerWing = new THREE.Mesh(lowerWingGeometry, wingMaterial);
-    leftLowerWing.position.set(-0.6, -0.8, 0);
+    leftLowerWing.position.set(-1.8, -2, 0);
     leftLowerWing.rotation.z = Math.PI / 4;
     butterfly.add(leftLowerWing);
 
     const rightLowerWing = new THREE.Mesh(lowerWingGeometry, wingMaterial);
-    rightLowerWing.position.set(0.6, -0.8, 0);
+    rightLowerWing.position.set(1.8, -2, 0);
     rightLowerWing.rotation.z = -Math.PI / 4;
     butterfly.add(rightLowerWing);
 
-    butterfly.position.set(0, 0, -2);
+    // Position butterfly closer and bigger
+    butterfly.position.set(0, 0, -1);
+    butterfly.scale.set(1.5, 1.5, 1.5); // Make it even bigger
     scene.add(butterfly);
 
-    // Create flowing fabric elements
+    // Create subtle flowing fabric elements (fewer and more transparent)
     const fabrics: THREE.Group[] = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 3; i++) {
       const fabricGroup = new THREE.Group();
       
-      const fabricGeometry = new THREE.PlaneGeometry(3, 4, 10, 10);
+      const fabricGeometry = new THREE.PlaneGeometry(4, 6, 10, 10);
       const fabricMaterial = new THREE.MeshPhongMaterial({
-        color: new THREE.Color().setHSL(0.6 + i * 0.1, 0.3, 0.7),
+        color: new THREE.Color().setHSL(0.6 + i * 0.1, 0.2, 0.8),
         transparent: true,
-        opacity: 0.3,
+        opacity: 0.15, // More transparent
         side: THREE.DoubleSide
       });
       
       const fabric = new THREE.Mesh(fabricGeometry, fabricMaterial);
       fabric.position.set(
-        (Math.random() - 0.5) * 20,
-        (Math.random() - 0.5) * 10,
-        -10 - Math.random() * 10
+        (Math.random() - 0.5) * 25,
+        (Math.random() - 0.5) * 15,
+        -15 - Math.random() * 15
       );
       fabric.rotation.set(
         Math.random() * Math.PI,
@@ -124,28 +129,28 @@ const ButterflyScene: React.FC = () => {
       scene.add(fabricGroup);
     }
 
-    // Particle system for ambient effects
+    // Reduced particle system for cleaner look
     const particleGeometry = new THREE.BufferGeometry();
-    const particleCount = 100;
+    const particleCount = 50; // Fewer particles
     const positions = new Float32Array(particleCount * 3);
     
     for (let i = 0; i < particleCount * 3; i++) {
-      positions[i] = (Math.random() - 0.5) * 50;
+      positions[i] = (Math.random() - 0.5) * 60;
     }
     
     particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     
     const particleMaterial = new THREE.PointsMaterial({
       color: 0xffffff,
-      size: 0.1,
+      size: 0.2,
       transparent: true,
-      opacity: 0.6
+      opacity: 0.4
     });
     
     const particles = new THREE.Points(particleGeometry, particleMaterial);
     scene.add(particles);
 
-    camera.position.z = 5;
+    camera.position.z = 8; // Move camera closer for bigger butterfly
 
     // Store references
     sceneRef.current = {
@@ -163,26 +168,27 @@ const ButterflyScene: React.FC = () => {
       
       const time = Date.now() * 0.001;
       
-      // Animate butterfly wings
-      const wingFlap = Math.sin(time * 8) * 0.3;
+      // Animate butterfly wings with more dramatic movement
+      const wingFlap = Math.sin(time * 6) * 0.4;
       butterfly.children[1].rotation.z = Math.PI / 6 + wingFlap; // Left wing
       butterfly.children[2].rotation.z = -Math.PI / 6 - wingFlap; // Right wing
-      butterfly.children[3].rotation.z = Math.PI / 4 + wingFlap * 0.5; // Left lower wing
-      butterfly.children[4].rotation.z = -Math.PI / 4 - wingFlap * 0.5; // Right lower wing
+      butterfly.children[3].rotation.z = Math.PI / 4 + wingFlap * 0.6; // Left lower wing
+      butterfly.children[4].rotation.z = -Math.PI / 4 - wingFlap * 0.6; // Right lower wing
       
-      // Gentle butterfly movement
-      butterfly.position.y = Math.sin(time * 0.5) * 0.2;
-      butterfly.position.x = Math.cos(time * 0.3) * 0.1;
+      // More prominent butterfly movement
+      butterfly.position.y = Math.sin(time * 0.4) * 0.5;
+      butterfly.position.x = Math.cos(time * 0.2) * 0.3;
+      butterfly.rotation.y = Math.sin(time * 0.3) * 0.1;
       
-      // Animate fabrics
+      // Animate fabrics more subtly
       fabrics.forEach((fabric, index) => {
-        fabric.rotation.x += 0.001 + index * 0.0002;
-        fabric.rotation.y += 0.002 + index * 0.0001;
-        fabric.position.y += Math.sin(time + index) * 0.01;
+        fabric.rotation.x += 0.0005 + index * 0.0001;
+        fabric.rotation.y += 0.001 + index * 0.0001;
+        fabric.position.y += Math.sin(time + index) * 0.005;
       });
       
       // Animate particles
-      particles.rotation.y += 0.001;
+      particles.rotation.y += 0.0005;
       
       renderer.render(scene, camera);
       sceneRef.current.animationId = requestAnimationFrame(animate);
