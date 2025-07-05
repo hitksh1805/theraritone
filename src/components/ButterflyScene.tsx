@@ -8,7 +8,7 @@ const ButterflyScene: React.FC = () => {
     const handleScroll = () => {
       if (containerRef.current) {
         const scrollY = window.scrollY;
-        const parallaxSpeed = 0.3;
+        const parallaxSpeed = 0.2;
         containerRef.current.style.transform = `translateY(${scrollY * parallaxSpeed}px)`;
       }
     };
@@ -28,180 +28,259 @@ const ButterflyScene: React.FC = () => {
         className="absolute inset-0 flex items-center justify-center"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 2, ease: "easeOut" }}
+        transition={{ duration: 3, ease: "easeOut" }}
       >
-        <motion.img
-          src="/IMG-20250305-WA0003-removebg-preview.png"
-          alt="Ethereal Butterfly"
-          className="w-full max-w-4xl h-auto opacity-20 blur-[1px]"
+        <motion.div
+          className="relative"
           style={{
-            filter: 'brightness(1.5) contrast(1.2) drop-shadow(0 0 40px rgba(255,255,255,0.3))',
-            mixBlendMode: 'lighten',
-            transform: 'rotate(-5deg)'
-          }}
-          initial={{ 
-            scale: 1, 
-            rotate: -5,
-            y: 0
+            width: '800px',
+            height: '600px',
+            opacity: 0.4,
+            filter: 'drop-shadow(0 0 30px rgba(236, 223, 204, 0.3))',
+            mixBlendMode: 'lighten'
           }}
           animate={{ 
-            scale: [1, 1.05, 1],
-            rotate: [-5, -3, -5],
-            y: [0, -10, 0]
+            scale: [1, 1.03, 1],
+            rotate: [0, 1, 0],
+            y: [0, -8, 0]
           }}
           transition={{
             repeat: Infinity,
             duration: 8,
-            ease: "easeInOut",
-            times: [0, 0.5, 1]
+            ease: "easeInOut"
           }}
-        />
+        >
+          {/* Butterfly SVG */}
+          <svg
+            viewBox="0 0 400 300"
+            className="w-full h-full"
+            style={{ filter: 'brightness(1.2)' }}
+          >
+            {/* Butterfly Body */}
+            <motion.ellipse
+              cx="200"
+              cy="150"
+              rx="3"
+              ry="80"
+              fill="rgba(236, 223, 204, 0.8)"
+              style={{ filter: 'drop-shadow(0 0 8px rgba(236, 223, 204, 0.5))' }}
+            />
+            
+            {/* Left Upper Wing */}
+            <motion.path
+              d="M200 100 Q120 60 80 80 Q60 100 70 130 Q90 160 140 140 Q180 120 200 100"
+              fill="rgba(236, 223, 204, 0.6)"
+              stroke="rgba(236, 223, 204, 0.8)"
+              strokeWidth="1"
+              style={{ 
+                filter: 'drop-shadow(0 0 15px rgba(236, 223, 204, 0.4))',
+                transformOrigin: '200px 100px'
+              }}
+              animate={{
+                rotateZ: [0, -3, 0],
+                scaleY: [1, 1.05, 1]
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 3,
+                ease: "easeInOut",
+                delay: 0
+              }}
+            />
+            
+            {/* Right Upper Wing */}
+            <motion.path
+              d="M200 100 Q280 60 320 80 Q340 100 330 130 Q310 160 260 140 Q220 120 200 100"
+              fill="rgba(236, 223, 204, 0.6)"
+              stroke="rgba(236, 223, 204, 0.8)"
+              strokeWidth="1"
+              style={{ 
+                filter: 'drop-shadow(0 0 15px rgba(236, 223, 204, 0.4))',
+                transformOrigin: '200px 100px'
+              }}
+              animate={{
+                rotateZ: [0, 3, 0],
+                scaleY: [1, 1.05, 1]
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 3,
+                ease: "easeInOut",
+                delay: 0
+              }}
+            />
+            
+            {/* Left Lower Wing */}
+            <motion.path
+              d="M200 150 Q140 180 110 200 Q90 220 100 240 Q120 260 160 250 Q190 230 200 200"
+              fill="rgba(236, 223, 204, 0.5)"
+              stroke="rgba(236, 223, 204, 0.7)"
+              strokeWidth="1"
+              style={{ 
+                filter: 'drop-shadow(0 0 12px rgba(236, 223, 204, 0.3))',
+                transformOrigin: '200px 150px'
+              }}
+              animate={{
+                rotateZ: [0, -2, 0],
+                scaleY: [1, 1.03, 1]
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 3,
+                ease: "easeInOut",
+                delay: 0.5
+              }}
+            />
+            
+            {/* Right Lower Wing */}
+            <motion.path
+              d="M200 150 Q260 180 290 200 Q310 220 300 240 Q280 260 240 250 Q210 230 200 200"
+              fill="rgba(236, 223, 204, 0.5)"
+              stroke="rgba(236, 223, 204, 0.7)"
+              strokeWidth="1"
+              style={{ 
+                filter: 'drop-shadow(0 0 12px rgba(236, 223, 204, 0.3))',
+                transformOrigin: '200px 150px'
+              }}
+              animate={{
+                rotateZ: [0, 2, 0],
+                scaleY: [1, 1.03, 1]
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 3,
+                ease: "easeInOut",
+                delay: 0.5
+              }}
+            />
+            
+            {/* Wing Details - Left */}
+            <circle cx="130" cy="110" r="8" fill="rgba(236, 223, 204, 0.3)" />
+            <circle cx="145" cy="190" r="6" fill="rgba(236, 223, 204, 0.3)" />
+            
+            {/* Wing Details - Right */}
+            <circle cx="270" cy="110" r="8" fill="rgba(236, 223, 204, 0.3)" />
+            <circle cx="255" cy="190" r="6" fill="rgba(236, 223, 204, 0.3)" />
+            
+            {/* Antennae */}
+            <motion.path
+              d="M195 80 Q190 70 185 65"
+              stroke="rgba(236, 223, 204, 0.8)"
+              strokeWidth="2"
+              fill="none"
+              animate={{ rotate: [0, 2, 0] }}
+              transition={{
+                repeat: Infinity,
+                duration: 4,
+                ease: "easeInOut"
+              }}
+            />
+            <motion.path
+              d="M205 80 Q210 70 215 65"
+              stroke="rgba(236, 223, 204, 0.8)"
+              strokeWidth="2"
+              fill="none"
+              animate={{ rotate: [0, -2, 0] }}
+              transition={{
+                repeat: Infinity,
+                duration: 4,
+                ease: "easeInOut"
+              }}
+            />
+            
+            {/* Antennae Tips */}
+            <circle cx="185" cy="65" r="2" fill="rgba(236, 223, 204, 0.9)" />
+            <circle cx="215" cy="65" r="2" fill="rgba(236, 223, 204, 0.9)" />
+          </svg>
+        </motion.div>
       </motion.div>
 
-      {/* Secondary Butterfly - Smaller, floating */}
+      {/* Smaller Ambient Butterfly - Top Right */}
       <motion.div
         className="absolute top-1/4 right-1/4"
-        initial={{ opacity: 0, x: 100 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 3, delay: 1, ease: "easeOut" }}
+        initial={{ opacity: 0, x: 50, y: -50 }}
+        animate={{ opacity: 1, x: 0, y: 0 }}
+        transition={{ duration: 4, delay: 2, ease: "easeOut" }}
       >
-        <motion.img
-          src="/IMG-20250305-WA0003-removebg-preview.png"
-          alt="Floating Butterfly"
-          className="w-32 h-auto opacity-15 blur-[0.5px]"
+        <motion.div
           style={{
-            filter: 'brightness(1.8) contrast(1.1) drop-shadow(0 0 20px rgba(255,255,255,0.2))',
-            mixBlendMode: 'lighten',
-            transform: 'rotate(15deg) scale(0.6)'
+            width: '120px',
+            height: '90px',
+            opacity: 0.2,
+            filter: 'drop-shadow(0 0 15px rgba(236, 223, 204, 0.2))',
+            mixBlendMode: 'lighten'
           }}
           animate={{ 
-            x: [0, 20, 0],
-            y: [0, -15, 0],
-            rotate: [15, 25, 15],
-            scale: [0.6, 0.65, 0.6]
+            x: [0, 15, 0],
+            y: [0, -10, 0],
+            rotate: [0, 5, 0]
           }}
           transition={{
             repeat: Infinity,
             duration: 6,
             ease: "easeInOut",
-            delay: 0.5
-          }}
-        />
-      </motion.div>
-
-      {/* Third Butterfly - Left side, subtle */}
-      <motion.div
-        className="absolute top-1/3 left-1/5"
-        initial={{ opacity: 0, x: -100 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 4, delay: 2, ease: "easeOut" }}
-      >
-        <motion.img
-          src="/IMG-20250305-WA0003-removebg-preview.png"
-          alt="Ambient Butterfly"
-          className="w-24 h-auto opacity-10 blur-[1px]"
-          style={{
-            filter: 'brightness(2) contrast(0.8) drop-shadow(0 0 15px rgba(255,255,255,0.15))',
-            mixBlendMode: 'lighten',
-            transform: 'rotate(-25deg) scale(0.4)'
-          }}
-          animate={{ 
-            x: [0, -10, 0],
-            y: [0, 10, 0],
-            rotate: [-25, -15, -25],
-            scale: [0.4, 0.45, 0.4]
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 10,
-            ease: "easeInOut",
             delay: 1
           }}
-        />
+        >
+          <svg viewBox="0 0 400 300" className="w-full h-full">
+            <ellipse cx="200" cy="150" rx="2" ry="50" fill="rgba(236, 223, 204, 0.6)" />
+            <path d="M200 120 Q150 90 120 100 Q100 110 110 130 Q130 150 170 140 Q190 130 200 120" 
+                  fill="rgba(236, 223, 204, 0.4)" />
+            <path d="M200 120 Q250 90 280 100 Q300 110 290 130 Q270 150 230 140 Q210 130 200 120" 
+                  fill="rgba(236, 223, 204, 0.4)" />
+            <path d="M200 150 Q160 170 140 180 Q120 190 130 200 Q150 210 180 200 Q195 190 200 180" 
+                  fill="rgba(236, 223, 204, 0.3)" />
+            <path d="M200 150 Q240 170 260 180 Q280 190 270 200 Q250 210 220 200 Q205 190 200 180" 
+                  fill="rgba(236, 223, 204, 0.3)" />
+          </svg>
+        </motion.div>
       </motion.div>
 
-      {/* Floating Particles - Subtle light dots */}
-      <div className="absolute inset-0">
-        {[...Array(8)].map((_, i) => (
+      {/* Floating Light Particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(6)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-white rounded-full opacity-20"
+            className="absolute w-1 h-1 rounded-full"
             style={{
-              left: `${20 + (i * 10)}%`,
-              top: `${30 + (i * 5)}%`,
+              left: `${25 + (i * 12)}%`,
+              top: `${35 + (i * 8)}%`,
+              background: 'rgba(236, 223, 204, 0.4)',
               filter: 'blur(0.5px)',
-              boxShadow: '0 0 4px rgba(255,255,255,0.5)'
+              boxShadow: '0 0 6px rgba(236, 223, 204, 0.6)'
             }}
             animate={{
-              y: [0, -20, 0],
-              opacity: [0.2, 0.4, 0.2],
-              scale: [1, 1.2, 1]
+              y: [0, -30, 0],
+              opacity: [0.2, 0.6, 0.2],
+              scale: [0.8, 1.2, 0.8]
             }}
             transition={{
               repeat: Infinity,
-              duration: 4 + (i * 0.5),
+              duration: 5 + (i * 0.8),
               ease: "easeInOut",
-              delay: i * 0.3
+              delay: i * 0.5
             }}
           />
         ))}
       </div>
 
-      {/* Ethereal Glow Effect */}
+      {/* Ethereal Background Glow */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 70%)',
+          background: 'radial-gradient(circle at 50% 45%, rgba(236, 223, 204, 0.08) 0%, transparent 60%)',
           mixBlendMode: 'lighten'
         }}
         animate={{
-          opacity: [0.3, 0.6, 0.3],
-          scale: [1, 1.1, 1]
+          opacity: [0.5, 0.8, 0.5],
+          scale: [1, 1.05, 1]
         }}
         transition={{
           repeat: Infinity,
-          duration: 12,
+          duration: 10,
           ease: "easeInOut"
         }}
       />
-
-      {/* Wing Flap Animation Overlay */}
-      <motion.div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none"
-        style={{ zIndex: 2 }}
-      >
-        <motion.div
-          className="relative w-full max-w-4xl h-auto"
-          animate={{
-            scaleX: [1, 1.02, 1],
-            scaleY: [1, 0.98, 1]
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 3,
-            ease: "easeInOut",
-            times: [0, 0.5, 1]
-          }}
-        >
-          {/* Wing flap effect using transform */}
-          <motion.div
-            className="absolute inset-0 opacity-10"
-            style={{
-              background: 'radial-gradient(ellipse 60% 40% at 50% 50%, rgba(255,255,255,0.3) 0%, transparent 70%)',
-              mixBlendMode: 'lighten'
-            }}
-            animate={{
-              scaleX: [1, 1.1, 1],
-              opacity: [0.1, 0.2, 0.1]
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 2,
-              ease: "easeInOut"
-            }}
-          />
-        </motion.div>
-      </motion.div>
     </div>
   );
 };
