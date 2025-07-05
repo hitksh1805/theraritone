@@ -263,32 +263,35 @@ const Index = () => {
         onCartOpen={() => setIsCartOpen(true)}
       />
 
-      {/* CINEMATIC 3D HERO SECTION */}
+      {/* ENHANCED HERO SECTION WITH LARGE BUTTERFLY */}
       <div className="relative min-h-screen overflow-hidden flex items-center justify-center">
-        {/* 3D Butterfly Background */}
+        {/* Large Realistic Butterfly Background */}
         <ButterflyScene />
         
         {/* Dark gradient overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" style={{ zIndex: 2 }} />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50" style={{ zIndex: 2 }} />
 
-        {/* Hero Content - NO RECTANGLE BACKGROUND */}
+        {/* Hero Content - PERFECTLY CENTERED LOGO */}
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-8" style={{ zIndex: 3 }}>
           <div className="p-8 sm:p-12 lg:p-16">
+            {/* DOMINANT RARITONE LOGO - Perfectly Centered */}
             <div className="mb-8">
               <img
                 src="/IMG-20250305-WA0003-removebg-preview.png"
                 alt="RARITONE"
-                className="mx-auto w-full max-w-xs sm:max-w-2xl h-auto float-animation"
+                className="mx-auto w-full max-w-sm sm:max-w-2xl h-auto"
                 style={{ 
-                  filter: 'drop-shadow(0 0 40px rgba(255,255,255,0.8)) brightness(1.2)',
-                  textShadow: '0 0 20px rgba(255,255,255,0.5)'
+                  filter: 'drop-shadow(0 0 50px rgba(255,255,255,0.9)) brightness(1.3)',
+                  textShadow: '0 0 30px rgba(255,255,255,0.7)',
+                  position: 'relative',
+                  zIndex: 10
                 }}
               />
             </div>
 
-            <p className="text-subtitle font-light mb-16 text-[rgb(236,223,204)] opacity-90" 
+            <p className="text-subtitle font-light mb-16 text-[rgb(236,223,204)] opacity-95" 
                style={{ 
-                 textShadow: '0 2px 10px rgba(0,0,0,0.8)',
+                 textShadow: '0 2px 15px rgba(0,0,0,0.9)',
                  filter: 'brightness(1.2)'
                }}>
               Fashion Meets Technology
@@ -297,13 +300,14 @@ const Index = () => {
             {/* Action Buttons with Enhanced Visibility */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-16">
               <button
-                className="btn-glass font-medium flex items-center space-x-3 rounded-full justify-center w-full max-w-xs sm:min-w-[220px] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base"
+                className="font-medium flex items-center space-x-3 rounded-full justify-center w-full max-w-xs sm:min-w-[220px] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base transition-all duration-300 hover:scale-105"
                 onClick={() => navigate('/scan')}
                 style={{
                   background: 'rgba(236, 223, 204, 0.15)',
                   border: '1px solid rgba(236, 223, 204, 0.4)',
                   backdropFilter: 'blur(20px)',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+                  color: 'rgb(236, 223, 204)'
                 }}
               >
                 <Camera size={isMobile ? 18 : 20} />
@@ -311,7 +315,7 @@ const Index = () => {
               </button>
               
               <button
-                className="btn-glass-primary font-medium flex items-center space-x-3 rounded-full justify-center w-full max-w-xs sm:min-w-[220px] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base"
+                className="font-medium flex items-center space-x-3 rounded-full justify-center w-full max-w-xs sm:min-w-[220px] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base transition-all duration-300 hover:scale-105"
                 onClick={() => navigate('/catalog')}
                 style={{
                   background: 'rgba(236, 223, 204, 0.95)',
@@ -327,7 +331,7 @@ const Index = () => {
             </div>
 
             {/* Notice Text with Better Visibility */}
-            <p className="max-w-md mx-auto leading-relaxed text-xs sm:text-sm px-4 opacity-80"
+            <p className="max-w-md mx-auto leading-relaxed text-xs sm:text-sm px-4 opacity-85"
                style={{ 
                  textShadow: '0 2px 8px rgba(0,0,0,0.8)',
                  background: 'rgba(0,0,0,0.3)',
