@@ -1,246 +1,208 @@
 import React, { useRef, useEffect } from 'react';
-import * as THREE from 'three';
+import { motion } from 'framer-motion';
 
 const ButterflyScene: React.FC = () => {
-  const mountRef = useRef<HTMLDivElement>(null);
-  const sceneRef = useRef<{
-    scene: THREE.Scene;
-    camera: THREE.PerspectiveCamera;
-    renderer: THREE.WebGLRenderer;
-    butterfly: THREE.Group;
-    fabrics: THREE.Group[];
-    animationId: number;
-  } | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!mountRef.current) return;
-
-    // Scene setup
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x000000, 0);
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    
-    mountRef.current.appendChild(renderer.domElement);
-
-    // Enhanced lighting setup for better visibility
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-    scene.add(ambientLight);
-
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
-    directionalLight.position.set(10, 10, 5);
-    directionalLight.castShadow = true;
-    scene.add(directionalLight);
-
-    const pointLight1 = new THREE.PointLight(0xffffff, 0.8, 100);
-    pointLight1.position.set(-10, 5, 10);
-    scene.add(pointLight1);
-
-    const pointLight2 = new THREE.PointLight(0xffffff, 0.8, 100);
-    pointLight2.position.set(10, -5, 10);
-    scene.add(pointLight2);
-
-    // Create MUCH BIGGER butterfly
-    const butterfly = new THREE.Group();
-    
-    // Butterfly body - bigger
-    const bodyGeometry = new THREE.CylinderGeometry(0.15, 0.25, 4, 8);
-    const bodyMaterial = new THREE.MeshPhongMaterial({ 
-      color: 0xffffff,
-      shininess: 100,
-      transparent: true,
-      opacity: 0.9
-    });
-    const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
-    butterfly.add(body);
-
-    // MUCH BIGGER butterfly wings with enhanced iridescent material
-    const wingGeometry = new THREE.PlaneGeometry(4, 5); // Much bigger wings
-    const wingMaterial = new THREE.MeshPhongMaterial({
-      color: 0xffffff,
-      transparent: true,
-      opacity: 0.95,
-      shininess: 150,
-      specular: 0xccccff,
-      side: THREE.DoubleSide,
-      emissive: 0x111111
-    });
-
-    // Left wing - bigger
-    const leftWing = new THREE.Mesh(wingGeometry, wingMaterial);
-    leftWing.position.set(-2.2, 0, 0);
-    leftWing.rotation.z = Math.PI / 6;
-    butterfly.add(leftWing);
-
-    // Right wing - bigger
-    const rightWing = new THREE.Mesh(wingGeometry, wingMaterial);
-    rightWing.position.set(2.2, 0, 0);
-    rightWing.rotation.z = -Math.PI / 6;
-    butterfly.add(rightWing);
-
-    // Lower wings - bigger
-    const lowerWingGeometry = new THREE.PlaneGeometry(3, 3.5);
-    const leftLowerWing = new THREE.Mesh(lowerWingGeometry, wingMaterial);
-    leftLowerWing.position.set(-1.8, -2, 0);
-    leftLowerWing.rotation.z = Math.PI / 4;
-    butterfly.add(leftLowerWing);
-
-    const rightLowerWing = new THREE.Mesh(lowerWingGeometry, wingMaterial);
-    rightLowerWing.position.set(1.8, -2, 0);
-    rightLowerWing.rotation.z = -Math.PI / 4;
-    butterfly.add(rightLowerWing);
-
-    // Position butterfly closer and bigger
-    butterfly.position.set(0, 0, -1);
-    butterfly.scale.set(1.5, 1.5, 1.5); // Make it even bigger
-    scene.add(butterfly);
-
-    // Create subtle flowing fabric elements (fewer and more transparent)
-    const fabrics: THREE.Group[] = [];
-    for (let i = 0; i < 3; i++) {
-      const fabricGroup = new THREE.Group();
-      
-      const fabricGeometry = new THREE.PlaneGeometry(4, 6, 10, 10);
-      const fabricMaterial = new THREE.MeshPhongMaterial({
-        color: new THREE.Color().setHSL(0.6 + i * 0.1, 0.2, 0.8),
-        transparent: true,
-        opacity: 0.15, // More transparent
-        side: THREE.DoubleSide
-      });
-      
-      const fabric = new THREE.Mesh(fabricGeometry, fabricMaterial);
-      fabric.position.set(
-        (Math.random() - 0.5) * 25,
-        (Math.random() - 0.5) * 15,
-        -15 - Math.random() * 15
-      );
-      fabric.rotation.set(
-        Math.random() * Math.PI,
-        Math.random() * Math.PI,
-        Math.random() * Math.PI
-      );
-      
-      fabricGroup.add(fabric);
-      fabrics.push(fabricGroup);
-      scene.add(fabricGroup);
-    }
-
-    // Reduced particle system for cleaner look
-    const particleGeometry = new THREE.BufferGeometry();
-    const particleCount = 50; // Fewer particles
-    const positions = new Float32Array(particleCount * 3);
-    
-    for (let i = 0; i < particleCount * 3; i++) {
-      positions[i] = (Math.random() - 0.5) * 60;
-    }
-    
-    particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    
-    const particleMaterial = new THREE.PointsMaterial({
-      color: 0xffffff,
-      size: 0.2,
-      transparent: true,
-      opacity: 0.4
-    });
-    
-    const particles = new THREE.Points(particleGeometry, particleMaterial);
-    scene.add(particles);
-
-    camera.position.z = 8; // Move camera closer for bigger butterfly
-
-    // Store references
-    sceneRef.current = {
-      scene,
-      camera,
-      renderer,
-      butterfly,
-      fabrics,
-      animationId: 0
-    };
-
-    // Animation loop
-    const animate = () => {
-      if (!sceneRef.current) return;
-      
-      const time = Date.now() * 0.001;
-      
-      // Animate butterfly wings with more dramatic movement
-      const wingFlap = Math.sin(time * 6) * 0.4;
-      butterfly.children[1].rotation.z = Math.PI / 6 + wingFlap; // Left wing
-      butterfly.children[2].rotation.z = -Math.PI / 6 - wingFlap; // Right wing
-      butterfly.children[3].rotation.z = Math.PI / 4 + wingFlap * 0.6; // Left lower wing
-      butterfly.children[4].rotation.z = -Math.PI / 4 - wingFlap * 0.6; // Right lower wing
-      
-      // More prominent butterfly movement
-      butterfly.position.y = Math.sin(time * 0.4) * 0.5;
-      butterfly.position.x = Math.cos(time * 0.2) * 0.3;
-      butterfly.rotation.y = Math.sin(time * 0.3) * 0.1;
-      
-      // Animate fabrics more subtly
-      fabrics.forEach((fabric, index) => {
-        fabric.rotation.x += 0.0005 + index * 0.0001;
-        fabric.rotation.y += 0.001 + index * 0.0001;
-        fabric.position.y += Math.sin(time + index) * 0.005;
-      });
-      
-      // Animate particles
-      particles.rotation.y += 0.0005;
-      
-      renderer.render(scene, camera);
-      sceneRef.current.animationId = requestAnimationFrame(animate);
-    };
-    
-    animate();
-
-    // Handle resize
-    const handleResize = () => {
-      if (!sceneRef.current) return;
-      
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    // Cleanup
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      
-      if (sceneRef.current) {
-        cancelAnimationFrame(sceneRef.current.animationId);
-        
-        if (mountRef.current && renderer.domElement) {
-          mountRef.current.removeChild(renderer.domElement);
-        }
-        
-        // Dispose of geometries and materials
-        scene.traverse((object) => {
-          if (object instanceof THREE.Mesh) {
-            object.geometry.dispose();
-            if (Array.isArray(object.material)) {
-              object.material.forEach(material => material.dispose());
-            } else {
-              object.material.dispose();
-            }
-          }
-        });
-        
-        renderer.dispose();
+    const handleScroll = () => {
+      if (containerRef.current) {
+        const scrollY = window.scrollY;
+        const parallaxSpeed = 0.3;
+        containerRef.current.style.transform = `translateY(${scrollY * parallaxSpeed}px)`;
       }
     };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <div 
-      ref={mountRef} 
-      className="absolute inset-0 w-full h-full"
+      ref={containerRef}
+      className="absolute inset-0 w-full h-full overflow-hidden"
       style={{ zIndex: 1 }}
-    />
+    >
+      {/* Main Butterfly - Large, centered behind logo */}
+      <motion.div
+        className="absolute inset-0 flex items-center justify-center"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 2, ease: "easeOut" }}
+      >
+        <motion.img
+          src="/IMG-20250305-WA0003-removebg-preview.png"
+          alt="Ethereal Butterfly"
+          className="w-full max-w-4xl h-auto opacity-20 blur-[1px]"
+          style={{
+            filter: 'brightness(1.5) contrast(1.2) drop-shadow(0 0 40px rgba(255,255,255,0.3))',
+            mixBlendMode: 'lighten',
+            transform: 'rotate(-5deg)'
+          }}
+          initial={{ 
+            scale: 1, 
+            rotate: -5,
+            y: 0
+          }}
+          animate={{ 
+            scale: [1, 1.05, 1],
+            rotate: [-5, -3, -5],
+            y: [0, -10, 0]
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 8,
+            ease: "easeInOut",
+            times: [0, 0.5, 1]
+          }}
+        />
+      </motion.div>
+
+      {/* Secondary Butterfly - Smaller, floating */}
+      <motion.div
+        className="absolute top-1/4 right-1/4"
+        initial={{ opacity: 0, x: 100 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 3, delay: 1, ease: "easeOut" }}
+      >
+        <motion.img
+          src="/IMG-20250305-WA0003-removebg-preview.png"
+          alt="Floating Butterfly"
+          className="w-32 h-auto opacity-15 blur-[0.5px]"
+          style={{
+            filter: 'brightness(1.8) contrast(1.1) drop-shadow(0 0 20px rgba(255,255,255,0.2))',
+            mixBlendMode: 'lighten',
+            transform: 'rotate(15deg) scale(0.6)'
+          }}
+          animate={{ 
+            x: [0, 20, 0],
+            y: [0, -15, 0],
+            rotate: [15, 25, 15],
+            scale: [0.6, 0.65, 0.6]
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 6,
+            ease: "easeInOut",
+            delay: 0.5
+          }}
+        />
+      </motion.div>
+
+      {/* Third Butterfly - Left side, subtle */}
+      <motion.div
+        className="absolute top-1/3 left-1/5"
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 4, delay: 2, ease: "easeOut" }}
+      >
+        <motion.img
+          src="/IMG-20250305-WA0003-removebg-preview.png"
+          alt="Ambient Butterfly"
+          className="w-24 h-auto opacity-10 blur-[1px]"
+          style={{
+            filter: 'brightness(2) contrast(0.8) drop-shadow(0 0 15px rgba(255,255,255,0.15))',
+            mixBlendMode: 'lighten',
+            transform: 'rotate(-25deg) scale(0.4)'
+          }}
+          animate={{ 
+            x: [0, -10, 0],
+            y: [0, 10, 0],
+            rotate: [-25, -15, -25],
+            scale: [0.4, 0.45, 0.4]
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 10,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
+      </motion.div>
+
+      {/* Floating Particles - Subtle light dots */}
+      <div className="absolute inset-0">
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-white rounded-full opacity-20"
+            style={{
+              left: `${20 + (i * 10)}%`,
+              top: `${30 + (i * 5)}%`,
+              filter: 'blur(0.5px)',
+              boxShadow: '0 0 4px rgba(255,255,255,0.5)'
+            }}
+            animate={{
+              y: [0, -20, 0],
+              opacity: [0.2, 0.4, 0.2],
+              scale: [1, 1.2, 1]
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 4 + (i * 0.5),
+              ease: "easeInOut",
+              delay: i * 0.3
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Ethereal Glow Effect */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 70%)',
+          mixBlendMode: 'lighten'
+        }}
+        animate={{
+          opacity: [0.3, 0.6, 0.3],
+          scale: [1, 1.1, 1]
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 12,
+          ease: "easeInOut"
+        }}
+      />
+
+      {/* Wing Flap Animation Overlay */}
+      <motion.div
+        className="absolute inset-0 flex items-center justify-center pointer-events-none"
+        style={{ zIndex: 2 }}
+      >
+        <motion.div
+          className="relative w-full max-w-4xl h-auto"
+          animate={{
+            scaleX: [1, 1.02, 1],
+            scaleY: [1, 0.98, 1]
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 3,
+            ease: "easeInOut",
+            times: [0, 0.5, 1]
+          }}
+        >
+          {/* Wing flap effect using transform */}
+          <motion.div
+            className="absolute inset-0 opacity-10"
+            style={{
+              background: 'radial-gradient(ellipse 60% 40% at 50% 50%, rgba(255,255,255,0.3) 0%, transparent 70%)',
+              mixBlendMode: 'lighten'
+            }}
+            animate={{
+              scaleX: [1, 1.1, 1],
+              opacity: [0.1, 0.2, 0.1]
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 2,
+              ease: "easeInOut"
+            }}
+          />
+        </motion.div>
+      </motion.div>
+    </div>
   );
 };
 
