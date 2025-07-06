@@ -8,7 +8,7 @@ const ButterflyScene: React.FC = () => {
     const handleScroll = () => {
       if (containerRef.current) {
         const scrollY = window.scrollY;
-        const parallaxSpeed = 0.15;
+        const parallaxSpeed = 0.1;
         containerRef.current.style.transform = `translateY(${scrollY * parallaxSpeed}px)`;
       }
     };
@@ -23,330 +23,362 @@ const ButterflyScene: React.FC = () => {
       className="absolute inset-0 w-full h-full overflow-hidden"
       style={{ zIndex: 1 }}
     >
-      {/* Main Dominant Butterfly - Massive Scale */}
+      {/* Main Butterfly - Positioned Higher, Matching Reference Style */}
       <motion.div
         className="absolute inset-0 flex items-center justify-center"
-        initial={{ opacity: 0, scale: 0.7 }}
+        style={{ transform: 'translateY(-15vh)' }} // Moved up significantly
+        initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 4, ease: "easeOut" }}
+        transition={{ duration: 3, ease: "easeOut" }}
       >
         <motion.div
           className="relative"
           style={{
-            width: '120vw',
-            height: '100vh',
-            opacity: 0.6,
-            filter: 'drop-shadow(0 0 60px rgba(236, 223, 204, 0.4))',
+            width: '140vw',
+            height: '90vh',
+            opacity: 0.4,
+            filter: 'drop-shadow(0 0 40px rgba(236, 223, 204, 0.3))',
             mixBlendMode: 'lighten'
           }}
           animate={{ 
-            scale: [1, 1.02, 1],
-            y: [0, -15, 0]
+            scale: [1, 1.03, 1],
+            y: [0, -12, 0]
           }}
           transition={{
             repeat: Infinity,
-            duration: 12,
+            duration: 10,
             ease: "easeInOut"
           }}
         >
-          {/* Realistic Butterfly SVG - Massive Wings */}
+          {/* Realistic Moth/Butterfly SVG - Based on Reference Image */}
           <svg
-            viewBox="0 0 1200 800"
+            viewBox="0 0 1400 900"
             className="w-full h-full"
-            style={{ filter: 'brightness(1.3) contrast(1.1)' }}
+            style={{ filter: 'brightness(1.2) contrast(1.1)' }}
           >
-            {/* Butterfly Body - Central Spine */}
+            {/* Butterfly Body - Thick, Realistic Body */}
             <motion.ellipse
-              cx="600"
-              cy="400"
-              rx="8"
-              ry="200"
-              fill="rgba(236, 223, 204, 0.9)"
+              cx="700"
+              cy="450"
+              rx="12"
+              ry="180"
+              fill="rgba(236, 223, 204, 0.8)"
               style={{ 
-                filter: 'drop-shadow(0 0 20px rgba(236, 223, 204, 0.6))',
-                transformOrigin: '600px 400px'
+                filter: 'drop-shadow(0 0 15px rgba(236, 223, 204, 0.5))',
+                transformOrigin: '700px 450px'
               }}
             />
             
-            {/* LEFT UPPER WING - Large Dominant Wing */}
+            {/* Body Segments */}
+            <ellipse cx="700" cy="380" rx="8" ry="15" fill="rgba(236, 223, 204, 0.6)" />
+            <ellipse cx="700" cy="420" rx="10" ry="20" fill="rgba(236, 223, 204, 0.7)" />
+            <ellipse cx="700" cy="480" rx="9" ry="18" fill="rgba(236, 223, 204, 0.6)" />
+            <ellipse cx="700" cy="520" rx="7" ry="15" fill="rgba(236, 223, 204, 0.5)" />
+            
+            {/* LEFT UPPER WING - Large, Translucent with Realistic Shape */}
             <motion.path
-              d="M600 250 Q400 100 200 150 Q50 200 80 300 Q120 400 200 450 Q350 480 500 420 Q580 380 600 300"
-              fill="rgba(236, 223, 204, 0.7)"
-              stroke="rgba(236, 223, 204, 0.9)"
-              strokeWidth="2"
+              d="M700 350 Q500 200 250 250 Q100 300 120 400 Q140 500 250 550 Q400 580 550 520 Q650 480 700 420"
+              fill="rgba(236, 223, 204, 0.3)"
+              stroke="rgba(236, 223, 204, 0.6)"
+              strokeWidth="1"
               style={{ 
-                filter: 'drop-shadow(0 0 30px rgba(236, 223, 204, 0.5))',
-                transformOrigin: '600px 250px'
+                filter: 'drop-shadow(0 0 25px rgba(236, 223, 204, 0.3))',
+                transformOrigin: '700px 350px'
               }}
               animate={{
-                rotateZ: [0, -4, 0],
-                scaleY: [1, 1.08, 1],
-                scaleX: [1, 1.03, 1]
+                rotateZ: [0, -2, 0],
+                scaleY: [1, 1.04, 1],
+                opacity: [0.3, 0.5, 0.3]
               }}
               transition={{
                 repeat: Infinity,
-                duration: 6,
+                duration: 8,
                 ease: "easeInOut",
                 delay: 0
               }}
             />
             
-            {/* RIGHT UPPER WING - Large Dominant Wing */}
+            {/* RIGHT UPPER WING - Large, Translucent with Realistic Shape */}
             <motion.path
-              d="M600 250 Q800 100 1000 150 Q1150 200 1120 300 Q1080 400 1000 450 Q850 480 700 420 Q620 380 600 300"
-              fill="rgba(236, 223, 204, 0.7)"
-              stroke="rgba(236, 223, 204, 0.9)"
-              strokeWidth="2"
+              d="M700 350 Q900 200 1150 250 Q1300 300 1280 400 Q1260 500 1150 550 Q1000 580 850 520 Q750 480 700 420"
+              fill="rgba(236, 223, 204, 0.3)"
+              stroke="rgba(236, 223, 204, 0.6)"
+              strokeWidth="1"
               style={{ 
-                filter: 'drop-shadow(0 0 30px rgba(236, 223, 204, 0.5))',
-                transformOrigin: '600px 250px'
+                filter: 'drop-shadow(0 0 25px rgba(236, 223, 204, 0.3))',
+                transformOrigin: '700px 350px'
               }}
               animate={{
-                rotateZ: [0, 4, 0],
-                scaleY: [1, 1.08, 1],
-                scaleX: [1, 1.03, 1]
+                rotateZ: [0, 2, 0],
+                scaleY: [1, 1.04, 1],
+                opacity: [0.3, 0.5, 0.3]
               }}
               transition={{
                 repeat: Infinity,
-                duration: 6,
+                duration: 8,
                 ease: "easeInOut",
                 delay: 0
               }}
             />
             
-            {/* LEFT LOWER WING - Secondary Wing */}
+            {/* LEFT LOWER WING - Distinctive Tail Shape */}
             <motion.path
-              d="M600 400 Q450 500 300 550 Q200 600 220 680 Q250 750 350 720 Q450 680 550 620 Q590 580 600 520"
-              fill="rgba(236, 223, 204, 0.6)"
-              stroke="rgba(236, 223, 204, 0.8)"
-              strokeWidth="2"
+              d="M700 450 Q550 550 400 600 Q300 650 280 720 Q290 780 350 770 Q420 750 500 700 Q600 650 700 580"
+              fill="rgba(236, 223, 204, 0.25)"
+              stroke="rgba(236, 223, 204, 0.5)"
+              strokeWidth="1"
               style={{ 
-                filter: 'drop-shadow(0 0 25px rgba(236, 223, 204, 0.4))',
-                transformOrigin: '600px 400px'
+                filter: 'drop-shadow(0 0 20px rgba(236, 223, 204, 0.2))',
+                transformOrigin: '700px 450px'
               }}
               animate={{
-                rotateZ: [0, -3, 0],
-                scaleY: [1, 1.05, 1]
+                rotateZ: [0, -1.5, 0],
+                scaleY: [1, 1.02, 1],
+                opacity: [0.25, 0.4, 0.25]
               }}
               transition={{
                 repeat: Infinity,
-                duration: 6,
+                duration: 8,
                 ease: "easeInOut",
                 delay: 1
               }}
             />
             
-            {/* RIGHT LOWER WING - Secondary Wing */}
+            {/* RIGHT LOWER WING - Distinctive Tail Shape */}
             <motion.path
-              d="M600 400 Q750 500 900 550 Q1000 600 980 680 Q950 750 850 720 Q750 680 650 620 Q610 580 600 520"
-              fill="rgba(236, 223, 204, 0.6)"
-              stroke="rgba(236, 223, 204, 0.8)"
-              strokeWidth="2"
+              d="M700 450 Q850 550 1000 600 Q1100 650 1120 720 Q1110 780 1050 770 Q980 750 900 700 Q800 650 700 580"
+              fill="rgba(236, 223, 204, 0.25)"
+              stroke="rgba(236, 223, 204, 0.5)"
+              strokeWidth="1"
               style={{ 
-                filter: 'drop-shadow(0 0 25px rgba(236, 223, 204, 0.4))',
-                transformOrigin: '600px 400px'
+                filter: 'drop-shadow(0 0 20px rgba(236, 223, 204, 0.2))',
+                transformOrigin: '700px 450px'
               }}
               animate={{
-                rotateZ: [0, 3, 0],
-                scaleY: [1, 1.05, 1]
+                rotateZ: [0, 1.5, 0],
+                scaleY: [1, 1.02, 1],
+                opacity: [0.25, 0.4, 0.25]
               }}
               transition={{
                 repeat: Infinity,
-                duration: 6,
+                duration: 8,
                 ease: "easeInOut",
                 delay: 1
               }}
             />
 
-            {/* Wing Pattern Details - Left Upper */}
+            {/* Wing Vein Patterns - Left Upper Wing */}
             <motion.path
-              d="M300 200 Q250 250 280 300 Q320 280 350 250 Q320 220 300 200"
-              fill="rgba(236, 223, 204, 0.4)"
-              animate={{
-                opacity: [0.4, 0.7, 0.4]
-              }}
+              d="M700 350 Q600 300 500 320 Q400 340 350 380"
+              stroke="rgba(236, 223, 204, 0.4)"
+              strokeWidth="0.5"
+              fill="none"
+              animate={{ opacity: [0.4, 0.7, 0.4] }}
               transition={{
                 repeat: Infinity,
-                duration: 8,
+                duration: 12,
                 ease: "easeInOut"
               }}
             />
-            
-            {/* Wing Pattern Details - Right Upper */}
             <motion.path
-              d="M900 200 Q950 250 920 300 Q880 280 850 250 Q880 220 900 200"
-              fill="rgba(236, 223, 204, 0.4)"
-              animate={{
-                opacity: [0.4, 0.7, 0.4]
-              }}
+              d="M650 380 Q550 360 450 380 Q350 400 300 440"
+              stroke="rgba(236, 223, 204, 0.3)"
+              strokeWidth="0.5"
+              fill="none"
+              animate={{ opacity: [0.3, 0.6, 0.3] }}
               transition={{
                 repeat: Infinity,
-                duration: 8,
+                duration: 12,
                 ease: "easeInOut",
                 delay: 2
               }}
             />
 
-            {/* Wing Spots - Left Wings */}
-            <circle cx="350" cy="280" r="15" fill="rgba(236, 223, 204, 0.5)" />
-            <circle cx="280" cy="320" r="12" fill="rgba(236, 223, 204, 0.4)" />
-            <circle cx="400" cy="580" r="18" fill="rgba(236, 223, 204, 0.5)" />
-            <circle cx="320" cy="620" r="14" fill="rgba(236, 223, 204, 0.4)" />
-            
-            {/* Wing Spots - Right Wings */}
-            <circle cx="850" cy="280" r="15" fill="rgba(236, 223, 204, 0.5)" />
-            <circle cx="920" cy="320" r="12" fill="rgba(236, 223, 204, 0.4)" />
-            <circle cx="800" cy="580" r="18" fill="rgba(236, 223, 204, 0.5)" />
-            <circle cx="880" cy="620" r="14" fill="rgba(236, 223, 204, 0.4)" />
-            
-            {/* Antennae */}
+            {/* Wing Vein Patterns - Right Upper Wing */}
             <motion.path
-              d="M590 200 Q580 180 570 160"
-              stroke="rgba(236, 223, 204, 0.9)"
-              strokeWidth="4"
+              d="M700 350 Q800 300 900 320 Q1000 340 1050 380"
+              stroke="rgba(236, 223, 204, 0.4)"
+              strokeWidth="0.5"
               fill="none"
-              animate={{ rotate: [0, 3, 0] }}
+              animate={{ opacity: [0.4, 0.7, 0.4] }}
               transition={{
                 repeat: Infinity,
-                duration: 8,
+                duration: 12,
+                ease: "easeInOut",
+                delay: 1
+              }}
+            />
+            <motion.path
+              d="M750 380 Q850 360 950 380 Q1050 400 1100 440"
+              stroke="rgba(236, 223, 204, 0.3)"
+              strokeWidth="0.5"
+              fill="none"
+              animate={{ opacity: [0.3, 0.6, 0.3] }}
+              transition={{
+                repeat: Infinity,
+                duration: 12,
+                ease: "easeInOut",
+                delay: 3
+              }}
+            />
+
+            {/* Wing Spots/Patterns - Subtle */}
+            <motion.ellipse
+              cx="450" cy="380" rx="20" ry="15"
+              fill="rgba(236, 223, 204, 0.2)"
+              animate={{ opacity: [0.2, 0.4, 0.2] }}
+              transition={{
+                repeat: Infinity,
+                duration: 10,
+                ease: "easeInOut"
+              }}
+            />
+            <motion.ellipse
+              cx="950" cy="380" rx="20" ry="15"
+              fill="rgba(236, 223, 204, 0.2)"
+              animate={{ opacity: [0.2, 0.4, 0.2] }}
+              transition={{
+                repeat: Infinity,
+                duration: 10,
+                ease: "easeInOut",
+                delay: 2
+              }}
+            />
+
+            {/* Wing Edge Details - Feathered Appearance */}
+            <motion.path
+              d="M250 250 Q200 280 180 320 Q190 350 220 380"
+              stroke="rgba(236, 223, 204, 0.3)"
+              strokeWidth="1"
+              fill="none"
+              animate={{ opacity: [0.3, 0.5, 0.3] }}
+              transition={{
+                repeat: Infinity,
+                duration: 15,
                 ease: "easeInOut"
               }}
             />
             <motion.path
-              d="M610 200 Q620 180 630 160"
-              stroke="rgba(236, 223, 204, 0.9)"
-              strokeWidth="4"
+              d="M1150 250 Q1200 280 1220 320 Q1210 350 1180 380"
+              stroke="rgba(236, 223, 204, 0.3)"
+              strokeWidth="1"
               fill="none"
-              animate={{ rotate: [0, -3, 0] }}
+              animate={{ opacity: [0.3, 0.5, 0.3] }}
               transition={{
                 repeat: Infinity,
-                duration: 8,
+                duration: 15,
+                ease: "easeInOut",
+                delay: 1
+              }}
+            />
+            
+            {/* Antennae - Delicate and Realistic */}
+            <motion.path
+              d="M690 320 Q680 300 670 280 Q665 270 660 260"
+              stroke="rgba(236, 223, 204, 0.8)"
+              strokeWidth="2"
+              fill="none"
+              animate={{ rotate: [0, 2, 0] }}
+              transition={{
+                repeat: Infinity,
+                duration: 6,
+                ease: "easeInOut"
+              }}
+            />
+            <motion.path
+              d="M710 320 Q720 300 730 280 Q735 270 740 260"
+              stroke="rgba(236, 223, 204, 0.8)"
+              strokeWidth="2"
+              fill="none"
+              animate={{ rotate: [0, -2, 0] }}
+              transition={{
+                repeat: Infinity,
+                duration: 6,
                 ease: "easeInOut"
               }}
             />
             
             {/* Antennae Tips */}
-            <circle cx="570" cy="160" r="4" fill="rgba(236, 223, 204, 1)" />
-            <circle cx="630" cy="160" r="4" fill="rgba(236, 223, 204, 1)" />
+            <circle cx="660" cy="260" r="3" fill="rgba(236, 223, 204, 0.9)" />
+            <circle cx="740" cy="260" r="3" fill="rgba(236, 223, 204, 0.9)" />
 
-            {/* Wing Texture Lines - Left Upper Wing */}
-            <motion.path
-              d="M200 200 Q300 180 400 220"
-              stroke="rgba(236, 223, 204, 0.3)"
-              strokeWidth="1"
-              fill="none"
-              animate={{ opacity: [0.3, 0.6, 0.3] }}
+            {/* Wing Transparency Gradients */}
+            <defs>
+              <radialGradient id="wingGradient" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor="rgba(236, 223, 204, 0.4)" />
+                <stop offset="70%" stopColor="rgba(236, 223, 204, 0.2)" />
+                <stop offset="100%" stopColor="rgba(236, 223, 204, 0.1)" />
+              </radialGradient>
+            </defs>
+
+            {/* Overlay Transparency Effects */}
+            <motion.ellipse
+              cx="450" cy="400" rx="150" ry="100"
+              fill="url(#wingGradient)"
+              animate={{ opacity: [0.2, 0.4, 0.2] }}
               transition={{
                 repeat: Infinity,
-                duration: 10,
+                duration: 8,
                 ease: "easeInOut"
               }}
             />
-            <motion.path
-              d="M180 250 Q280 230 380 270"
-              stroke="rgba(236, 223, 204, 0.3)"
-              strokeWidth="1"
-              fill="none"
-              animate={{ opacity: [0.3, 0.6, 0.3] }}
+            <motion.ellipse
+              cx="950" cy="400" rx="150" ry="100"
+              fill="url(#wingGradient)"
+              animate={{ opacity: [0.2, 0.4, 0.2] }}
               transition={{
                 repeat: Infinity,
-                duration: 10,
-                ease: "easeInOut",
-                delay: 2
-              }}
-            />
-
-            {/* Wing Texture Lines - Right Upper Wing */}
-            <motion.path
-              d="M1000 200 Q900 180 800 220"
-              stroke="rgba(236, 223, 204, 0.3)"
-              strokeWidth="1"
-              fill="none"
-              animate={{ opacity: [0.3, 0.6, 0.3] }}
-              transition={{
-                repeat: Infinity,
-                duration: 10,
+                duration: 8,
                 ease: "easeInOut",
                 delay: 1
-              }}
-            />
-            <motion.path
-              d="M1020 250 Q920 230 820 270"
-              stroke="rgba(236, 223, 204, 0.3)"
-              strokeWidth="1"
-              fill="none"
-              animate={{ opacity: [0.3, 0.6, 0.3] }}
-              transition={{
-                repeat: Infinity,
-                duration: 10,
-                ease: "easeInOut",
-                delay: 3
               }}
             />
           </svg>
         </motion.div>
       </motion.div>
 
-      {/* Ethereal Particles Around Wings */}
+      {/* Subtle Floating Particles */}
       <div className="absolute inset-0 pointer-events-none">
-        {[...Array(12)].map((_, i) => (
+        {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 rounded-full"
+            className="absolute w-1 h-1 rounded-full"
             style={{
-              left: `${20 + (i * 6)}%`,
-              top: `${30 + (i * 4)}%`,
-              background: 'rgba(236, 223, 204, 0.6)',
-              filter: 'blur(1px)',
-              boxShadow: '0 0 12px rgba(236, 223, 204, 0.8)'
+              left: `${25 + (i * 8)}%`,
+              top: `${25 + (i * 6)}%`,
+              background: 'rgba(236, 223, 204, 0.4)',
+              filter: 'blur(0.5px)',
+              boxShadow: '0 0 8px rgba(236, 223, 204, 0.6)'
             }}
             animate={{
-              y: [0, -40, 0],
-              opacity: [0.3, 0.8, 0.3],
-              scale: [0.5, 1.2, 0.5]
+              y: [0, -25, 0],
+              opacity: [0.2, 0.6, 0.2],
+              scale: [0.8, 1.2, 0.8]
             }}
             transition={{
               repeat: Infinity,
-              duration: 8 + (i * 0.5),
+              duration: 6 + (i * 0.5),
               ease: "easeInOut",
-              delay: i * 0.3
+              delay: i * 0.4
             }}
           />
         ))}
       </div>
 
-      {/* Ambient Glow Behind Butterfly */}
+      {/* Ethereal Background Glow */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 80% 60% at 50% 45%, rgba(236, 223, 204, 0.12) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 70% 50% at 50% 35%, rgba(236, 223, 204, 0.08) 0%, transparent 60%)',
           mixBlendMode: 'lighten'
         }}
         animate={{
-          opacity: [0.6, 1, 0.6],
-          scale: [1, 1.1, 1]
+          opacity: [0.4, 0.7, 0.4],
+          scale: [1, 1.05, 1]
         }}
         transition={{
           repeat: Infinity,
-          duration: 15,
-          ease: "easeInOut"
-        }}
-      />
-
-      {/* Scroll-Triggered Wing Flutter Enhancement */}
-      <motion.div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle at 50% 50%, rgba(236, 223, 204, 0.05) 0%, transparent 50%)',
-          mixBlendMode: 'screen'
-        }}
-        animate={{
-          scale: [1, 1.05, 1],
-          opacity: [0.5, 0.8, 0.5]
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 20,
+          duration: 12,
           ease: "easeInOut"
         }}
       />
