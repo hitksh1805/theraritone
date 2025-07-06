@@ -392,7 +392,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ onSearchOpen, onCartOpen, pageTitl
           </div>
         </div>
 
-        {/* Menu Dropdown with Glass Effect */}
+        {/* IMPROVED Menu Dropdown with Enhanced Background */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
@@ -403,7 +403,14 @@ const Navbar: React.FC<NavbarProps> = memo(({ onSearchOpen, onCartOpen, pageTitl
                 duration: 0.3, 
                 ease: [0.4, 0, 0.2, 1]
               }}
-              className="overflow-hidden glass-strong border-t border-white/10"
+              className="overflow-hidden"
+              style={{
+                background: 'rgba(24, 28, 20, 0.9)',
+                backdropFilter: 'blur(40px) saturate(180%)',
+                WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+                borderTop: '1px solid rgba(105, 117, 101, 0.3)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)'
+              }}
             >
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
                 <div className="flex justify-center gap-4 sm:gap-8 flex-wrap">
@@ -418,14 +425,14 @@ const Navbar: React.FC<NavbarProps> = memo(({ onSearchOpen, onCartOpen, pageTitl
                         ease: [0.4, 0, 0.2, 1]
                       }}
                       whileHover={{ y: -3 }}
-                      className="glass rounded-xl hover-glass transition-glass"
+                      className="transition-all duration-300"
                     >
                       <button
                         onClick={() => {
                           navigate(item.path);
                           setIsMenuOpen(false);
                         }}
-                        className="w-full text-center text-[rgb(236,223,204)] hover:text-white transition-smooth flex flex-col items-center rounded-xl px-3 py-4 sm:px-4 sm:py-6 space-y-2 sm:space-y-3"
+                        className="w-full text-center text-[rgb(236,223,204)] hover:text-white transition-smooth flex flex-col items-center px-3 py-4 sm:px-4 sm:py-6 space-y-2 sm:space-y-3 rounded-xl hover:bg-white/5"
                       >
                         <motion.div
                           whileHover={{ scale: 1.2, rotate: 5 }}
