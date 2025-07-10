@@ -256,14 +256,14 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen text-[rgb(236,223,204)]" style={{ background: 'linear-gradient(135deg, #2a2d2a 0%, #1a1d1a 100%)' }}>
+    <div className="min-h-screen text-[#DFD0B8]" style={{ background: '#222831' }}>
       {/* Navigation */}
       <Navbar 
         onSearchOpen={() => setIsSearchOpen(true)}
         onCartOpen={() => setIsCartOpen(true)}
       />
 
-      {/* CINEMATIC 3D HERO SECTION */}
+      {/* HERO SECTION WITH BODY SCAN FOCUS */}
       <div className="relative min-h-screen overflow-hidden flex items-center justify-center">
         {/* 3D Butterfly Background */}
         <ButterflyScene />
@@ -271,14 +271,14 @@ const Index = () => {
         {/* Dark gradient overlay for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" style={{ zIndex: 2 }} />
 
-        {/* Hero Content - NO RECTANGLE BACKGROUND */}
+        {/* Hero Content */}
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-8" style={{ zIndex: 3 }}>
           <div className="p-8 sm:p-12 lg:p-16">
             <div className="mb-8">
               <img
                 src="/IMG-20250305-WA0003-removebg-preview.png"
                 alt="RARITONE"
-                className="mx-auto w-full max-w-xs sm:max-w-2xl h-auto float-animation"
+                className="mx-auto w-full max-w-xs sm:max-w-2xl h-auto"
                 style={{ 
                   filter: 'drop-shadow(0 0 40px rgba(255,255,255,0.8)) brightness(1.2)',
                   textShadow: '0 0 20px rgba(255,255,255,0.5)'
@@ -286,7 +286,7 @@ const Index = () => {
               />
             </div>
 
-            <p className="text-subtitle font-light mb-16 text-[rgb(236,223,204)] opacity-90" 
+            <p className="text-subtitle font-light mb-16 text-[#DFD0B8] opacity-90" 
                style={{ 
                  textShadow: '0 2px 10px rgba(0,0,0,0.8)',
                  filter: 'brightness(1.2)'
@@ -294,129 +294,107 @@ const Index = () => {
               Fashion Meets Technology
             </p>
 
-            {/* Action Buttons with Enhanced Visibility */}
+            {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-16">
               <button
-                className="btn-glass font-medium flex items-center space-x-3 rounded-full justify-center w-full max-w-xs sm:min-w-[220px] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base"
+                className="btn-primary font-medium flex items-center space-x-3 rounded-full justify-center w-full max-w-xs sm:min-w-[220px] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base fast-transition"
                 onClick={() => navigate('/scan')}
-                style={{
-                  background: 'rgba(236, 223, 204, 0.15)',
-                  border: '1px solid rgba(236, 223, 204, 0.4)',
-                  backdropFilter: 'blur(20px)',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
-                }}
               >
                 <Camera size={isMobile ? 18 : 20} />
                 <span>Start Body Scan</span>
               </button>
               
               <button
-                className="btn-glass-primary font-medium flex items-center space-x-3 rounded-full justify-center w-full max-w-xs sm:min-w-[220px] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base"
+                className="btn-secondary font-medium flex items-center space-x-3 rounded-full justify-center w-full max-w-xs sm:min-w-[220px] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base fast-transition"
                 onClick={() => navigate('/catalog')}
-                style={{
-                  background: 'rgba(236, 223, 204, 0.95)',
-                  color: 'rgb(24, 28, 20)',
-                  border: '1px solid rgba(236, 223, 204, 1)',
-                  backdropFilter: 'blur(20px)',
-                  boxShadow: '0 8px 32px rgba(236, 223, 204, 0.3)'
-                }}
               >
                 <ShoppingBag size={isMobile ? 18 : 20} />
                 <span>Browse Collection</span>
               </button>
             </div>
 
-            {/* Notice Text with Better Visibility */}
-            <p className="max-w-md mx-auto leading-relaxed text-xs sm:text-sm px-4 opacity-80"
-               style={{ 
-                 textShadow: '0 2px 8px rgba(0,0,0,0.8)',
-                 background: 'rgba(0,0,0,0.3)',
-                 padding: '8px 16px',
-                 borderRadius: '8px',
-                 backdropFilter: 'blur(10px)'
-               }}>
+            {/* Notice Text */}
+            <p className="notice-text max-w-md mx-auto leading-relaxed text-xs sm:text-sm px-4">
               This site uses webcam access to enable AI-powered try-ons. Your camera data is never stored or shared.
             </p>
           </div>
         </div>
       </div>
 
-      {/* NEW ARRIVALS SECTION */}
-      <section className="py-12 sm:py-20" style={{ background: 'linear-gradient(135deg, #1a1d1a 0%, #2a2d2a 100%)' }}>
+      {/* BODY SCAN BENEFITS SECTION (REPLACES NEW ARRIVALS) */}
+      <section className="py-12 sm:py-20" style={{ background: '#393E46' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-16">
-            <h2 className="text-hero font-light mb-4 text-[rgb(236,223,204)] flex items-center justify-center">
-              <Sparkles className="mr-3" size={isMobile ? 24 : 32} />
-              New Arrivals
+            <h2 className="text-hero font-light mb-4 text-[#DFD0B8] flex items-center justify-center">
+              <Camera className="mr-3" size={isMobile ? 24 : 32} />
+              AI Body Scan Benefits
             </h2>
-            <p className="text-subtitle text-[rgb(105,117,101)] max-w-2xl mx-auto px-4">
-              Discover our latest collections, meticulously crafted and designed for the modern luxury connoisseur.
+            <p className="text-subtitle text-[#948979] max-w-2xl mx-auto px-4">
+              Experience the future of fashion with our revolutionary AI-powered body scanning technology.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-            {newArrivals.map((item) => (
-              <div
-                key={item.id}
-                className="group cursor-pointer"
-                onClick={() => navigate('/catalog')}
-              >
-                <div className="glass-card rounded-2xl overflow-hidden transition-glass hover-glass">
-                  <div className="aspect-[3/4] relative overflow-hidden">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute top-3 left-3">
-                      <span className={`font-medium rounded-full px-3 py-1 text-xs backdrop-blur-md ${
-                        item.tag === 'Out of Stock' 
-                          ? 'bg-red-500/80 text-white' 
-                          : 'bg-white/20 text-white border border-white/30'
-                      }`}>
-                        {item.tag}
-                      </span>
-                    </div>
-                    
-                    {/* Wishlist Heart Button */}
-                    <button
-                      onClick={(e) => quickAddToWishlist(e, item.id.toString())}
-                      className={`absolute top-3 right-3 p-2 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100 backdrop-blur-md ${
-                        wishlist.includes(item.id.toString())
-                          ? 'bg-red-500/80 text-white'
-                          : 'bg-white/20 text-white hover:bg-white/30 border border-white/30'
-                      }`}
-                    >
-                      <Heart 
-                        size={14} 
-                        className={wishlist.includes(item.id.toString()) ? 'fill-current' : ''} 
-                      />
-                    </button>
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-medium mb-2 text-[rgb(236,223,204)] text-base sm:text-lg">
-                      {item.name}
-                    </h3>
-                    <p className="text-[rgb(105,117,101)] text-sm">
-                      {item.price}
-                    </p>
-                  </div>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Privacy */}
+            <div className="card-dark rounded-2xl p-8 text-center">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-[#181C14] flex items-center justify-center">
+                <svg className="w-8 h-8 text-[#DFD0B8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
               </div>
-            ))}
+              <h3 className="text-xl font-semibold text-[#DFD0B8] mb-4">100% Private</h3>
+              <p className="text-[#948979] leading-relaxed">
+                Your body scan data is processed locally on your device and never stored on our servers. Complete privacy guaranteed.
+              </p>
+            </div>
+
+            {/* Accuracy */}
+            <div className="card-dark rounded-2xl p-8 text-center">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-[#181C14] flex items-center justify-center">
+                <svg className="w-8 h-8 text-[#DFD0B8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-[#DFD0B8] mb-4">99% Accurate</h3>
+              <p className="text-[#948979] leading-relaxed">
+                Our AI technology provides precise measurements with 99% accuracy, ensuring the perfect fit every time.
+              </p>
+            </div>
+
+            {/* Convenience */}
+            <div className="card-dark rounded-2xl p-8 text-center">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-[#181C14] flex items-center justify-center">
+                <svg className="w-8 h-8 text-[#DFD0B8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-[#DFD0B8] mb-4">30 Second Scan</h3>
+              <p className="text-[#948979] leading-relaxed">
+                Quick and easy scanning process takes just 30 seconds. No special equipment needed, just your smartphone camera.
+              </p>
+            </div>
+          </div>
+
+          <div className="text-center mt-12">
+            <button
+              onClick={() => navigate('/scan')}
+              className="btn-primary px-8 py-4 rounded-full text-lg font-medium fast-transition"
+            >
+              Try Body Scan Now
+            </button>
           </div>
         </div>
       </section>
 
       {/* CATEGORIES SECTION */}
-      <section className="py-12 sm:py-20" style={{ background: 'linear-gradient(135deg, #2a2d2a 0%, #1a1d1a 100%)' }}>
+      <section className="py-12 sm:py-20" style={{ background: '#181C14' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-16">
-            <h2 className="text-hero font-light mb-4 text-[rgb(236,223,204)] flex items-center justify-center">
+            <h2 className="text-hero font-light mb-4 text-[#DFD0B8] flex items-center justify-center">
               <TrendingUp className="mr-3" size={isMobile ? 24 : 32} />
               Shop by Category
             </h2>
-            <p className="text-subtitle text-[rgb(105,117,101)] max-w-2xl mx-auto px-4">
+            <p className="text-subtitle text-[#948979] max-w-2xl mx-auto px-4">
               Explore our diverse range of fashion categories, each carefully curated for your unique style.
             </p>
           </div>
@@ -428,20 +406,20 @@ const Index = () => {
                 className="group cursor-pointer"
                 onClick={() => handleCategoryClick(category.category)}
               >
-                <div className="glass-card rounded-2xl overflow-hidden transition-glass hover-glass">
+                <div className="card-dark rounded-2xl overflow-hidden fast-transition hover:scale-105">
                   <div className="aspect-square relative overflow-hidden">
                     <img
                       src={category.image}
                       alt={category.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover group-hover:scale-105 fast-transition"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   </div>
                   <div className="text-center p-4">
-                    <h3 className="font-medium mb-1 text-[rgb(236,223,204)] text-base sm:text-lg">
+                    <h3 className="font-medium mb-1 text-[#DFD0B8] text-base sm:text-lg">
                       {category.name}
                     </h3>
-                    <p className="text-[rgb(105,117,101)] text-sm">
+                    <p className="text-[#948979] text-sm">
                       {category.count}
                     </p>
                   </div>
@@ -453,14 +431,14 @@ const Index = () => {
       </section>
 
       {/* BEST PICKS SECTION */}
-      <section className="py-12 sm:py-20" style={{ background: 'linear-gradient(135deg, #1a1d1a 0%, #2a2d2a 100%)' }}>
+      <section className="py-12 sm:py-20" style={{ background: '#393E46' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-16">
-            <h2 className="text-hero font-light mb-4 text-[rgb(236,223,204)] flex items-center justify-center">
+            <h2 className="text-hero font-light mb-4 text-[#DFD0B8] flex items-center justify-center">
               <Star className="mr-3" size={isMobile ? 24 : 32} />
               Best Picks
             </h2>
-            <p className="text-subtitle text-[rgb(105,117,101)] max-w-2xl mx-auto px-4">
+            <p className="text-subtitle text-[#948979] max-w-2xl mx-auto px-4">
               Our most popular items, loved by customers worldwide for their exceptional quality and style.
             </p>
           </div>
@@ -472,14 +450,14 @@ const Index = () => {
                 className="group cursor-pointer"
                 onClick={() => handleBestPickClick(item)}
               >
-                <div className="glass-card rounded-2xl overflow-hidden transition-glass hover-glass">
+                <div className="card-dark rounded-2xl overflow-hidden fast-transition hover:scale-105">
                   <div className="aspect-[3/4] relative overflow-hidden">
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover group-hover:scale-105 fast-transition"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 fast-transition" />
                     
                     {/* Wishlist Heart Button */}
                     <button
@@ -487,9 +465,9 @@ const Index = () => {
                         e.stopPropagation();
                         handleAddToWishlist(item.id);
                       }}
-                      className={`absolute top-4 right-4 p-2 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100 backdrop-blur-md ${
+                      className={`absolute top-4 right-4 p-2 rounded-full fast-transition opacity-0 group-hover:opacity-100 ${
                         wishlist.includes(item.id)
-                          ? 'bg-red-500/80 text-white'
+                          ? 'bg-red-500 text-white'
                           : 'bg-white/20 text-white hover:bg-white/30 border border-white/30'
                       }`}
                     >
@@ -501,17 +479,17 @@ const Index = () => {
                   </div>
                   <div className="p-4">
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-medium text-[rgb(236,223,204)] text-base sm:text-lg">
+                      <h3 className="font-medium text-[#DFD0B8] text-base sm:text-lg">
                         {item.name}
                       </h3>
                       <div className="flex items-center space-x-1">
                         <Star size={14} className="text-yellow-400 fill-current" />
-                        <span className="text-[rgb(105,117,101)] text-sm">
+                        <span className="text-[#948979] text-sm">
                           {item.rating}
                         </span>
                       </div>
                     </div>
-                    <p className="text-[rgb(105,117,101)] text-sm">
+                    <p className="text-[#948979] text-sm">
                       ₹{item.price}
                     </p>
                   </div>
@@ -523,9 +501,9 @@ const Index = () => {
       </section>
 
       {/* FOOTER SECTION */}
-      <footer className="py-8 sm:py-16 border-t border-white/10" style={{ background: 'linear-gradient(135deg, #2a2d2a 0%, #1a1d1a 100%)' }}>
+      <footer className="py-8 sm:py-16 border-t border-[#697565]" style={{ background: '#181C14' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="glass-card rounded-2xl p-6 sm:p-8">
+          <div className="card-dark rounded-2xl p-6 sm:p-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {/* Brand Section */}
               <div className="lg:col-span-2">
@@ -534,7 +512,7 @@ const Index = () => {
                   alt="RARITONE"
                   className="h-16 sm:h-20 w-auto mb-4"
                 />
-                <p className="text-[rgb(105,117,101)] max-w-md leading-relaxed text-sm sm:text-base">
+                <p className="text-[#948979] max-w-md leading-relaxed text-sm sm:text-base">
                   Revolutionizing fashion with AI-powered body scanning technology. 
                   Experience perfect fit and personalized style recommendations across India.
                 </p>
@@ -542,35 +520,35 @@ const Index = () => {
 
               {/* Quick Links */}
               <div>
-                <h3 className="font-semibold text-[rgb(236,223,204)] mb-4 text-base sm:text-lg">Quick Links</h3>
+                <h3 className="font-semibold text-[#DFD0B8] mb-4 text-base sm:text-lg">Quick Links</h3>
                 <ul className="space-y-2">
-                  <li><a href="/shipping" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] text-sm sm:text-base transition-colors">Shipping & Delivery</a></li>
-                  <li><a href="/returns" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] text-sm sm:text-base transition-colors">Returns & Exchanges</a></li>
-                  <li><a href="/faqs" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] text-sm sm:text-base transition-colors">FAQs</a></li>
-                  <li><a href="/terms" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] text-sm sm:text-base transition-colors">Terms & Conditions</a></li>
-                  <li><a href="/contact" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] text-sm sm:text-base transition-colors">Contact Us</a></li>
+                  <li><a href="/shipping" className="text-[#948979] hover:text-[#DFD0B8] text-sm sm:text-base fast-transition">Shipping & Delivery</a></li>
+                  <li><a href="/returns" className="text-[#948979] hover:text-[#DFD0B8] text-sm sm:text-base fast-transition">Returns & Exchanges</a></li>
+                  <li><a href="/faqs" className="text-[#948979] hover:text-[#DFD0B8] text-sm sm:text-base fast-transition">FAQs</a></li>
+                  <li><a href="/terms" className="text-[#948979] hover:text-[#DFD0B8] text-sm sm:text-base fast-transition">Terms & Conditions</a></li>
+                  <li><a href="/contact" className="text-[#948979] hover:text-[#DFD0B8] text-sm sm:text-base fast-transition">Contact Us</a></li>
                 </ul>
               </div>
 
               {/* Contact Info */}
               <div>
-                <h3 className="font-semibold text-[rgb(236,223,204)] mb-4 text-base sm:text-lg">Contact</h3>
+                <h3 className="font-semibold text-[#DFD0B8] mb-4 text-base sm:text-lg">Contact</h3>
                 <div className="space-y-3">
                   <div className="flex items-center space-x-3">
-                    <Mail size={16} className="text-[rgb(105,117,101)]" />
-                    <span className="text-[rgb(105,117,101)] text-sm sm:text-base">
+                    <Mail size={16} className="text-[#948979]" />
+                    <span className="text-[#948979] text-sm sm:text-base">
                       hello@raritone.in
                     </span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <Phone size={16} className="text-[rgb(105,117,101)]" />
-                    <span className="text-[rgb(105,117,101)] text-sm sm:text-base">
+                    <Phone size={16} className="text-[#948979]" />
+                    <span className="text-[#948979] text-sm sm:text-base">
                       +91 98765 43210
                     </span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <MapPin size={16} className="text-[rgb(105,117,101)]" />
-                    <span className="text-[rgb(105,117,101)] text-sm sm:text-base">
+                    <MapPin size={16} className="text-[#948979]" />
+                    <span className="text-[#948979] text-sm sm:text-base">
                       Mumbai, India
                     </span>
                   </div>
@@ -578,8 +556,8 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="border-t border-white/10 mt-8 sm:mt-12 pt-6 sm:pt-8 text-center">
-              <p className="text-[rgb(105,117,101)] text-xs sm:text-sm">
+            <div className="border-t border-[#697565] mt-8 sm:mt-12 pt-6 sm:pt-8 text-center">
+              <p className="text-[#948979] text-xs sm:text-sm">
                 © 2025 RARITONE. All rights reserved. | Powered by AI Fashion Technology | Made in India
               </p>
             </div>

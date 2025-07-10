@@ -126,30 +126,35 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
   return (
     <div
       className="fixed inset-0 z-50"
-      style={{ backgroundColor: 'rgb(60, 61, 55)' }} // #3C3D37 - Main Background
+      style={{ backgroundColor: '#222831' }}
     >
       <div className="min-h-screen">
         {/* Header */}
-        <div className="border-b border-[rgb(105,117,101)] p-6" style={{ backgroundColor: 'rgb(24, 28, 20)' }}>
+        <div 
+          className="border-b p-6"
+          style={{ 
+            backgroundColor: '#181C14',
+            borderColor: '#697565'
+          }}
+        >
           <div className="max-w-4xl mx-auto flex items-center justify-between">
             <div className="flex-1 mr-8">
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[rgb(105,117,101)]" size={20} />
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#948979]" size={20} />
                 <input
                   id="search-input"
                   type="text"
                   placeholder="Search for products..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 text-lg border border-[rgb(105,117,101)] focus:outline-none focus:ring-2 focus:ring-[rgb(105,117,101)] rounded-lg text-[rgb(236,223,204)] placeholder-[rgb(105,117,101)]"
-                  style={{ backgroundColor: 'rgb(60, 61, 55)' }} // #3C3D37 - Input Background
+                  className="input-dark w-full pl-12 pr-4 py-4 text-lg rounded-lg"
                 />
               </div>
             </div>
             
             <button
               onClick={onClose}
-              className="p-2 hover:bg-[rgb(60,61,55)] rounded-full text-[rgb(236,223,204)]"
+              className="p-2 hover:bg-[#393E46] rounded-full text-[#DFD0B8] fast-transition"
             >
               <X size={24} />
             </button>
@@ -161,14 +166,14 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
           {/* Loading */}
           {isLoading && (
             <div className="flex justify-center py-8">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[rgb(236,223,204)]"></div>
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#DFD0B8]"></div>
             </div>
           )}
 
           {/* Search Results */}
           {searchResults.length > 0 && !isLoading && (
             <div className="mb-8">
-              <h3 className="text-lg font-medium mb-4 text-[rgb(236,223,204)]">Search Results</h3>
+              <h3 className="text-lg font-medium mb-4 text-[#DFD0B8]">Search Results</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {searchResults.map((product) => (
                   <div
@@ -176,16 +181,18 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
                     className="cursor-pointer group"
                     onClick={() => handleProductClick(product)}
                   >
-                    <div className="aspect-square relative mb-2 overflow-hidden rounded-lg border border-[rgb(105,117,101)]">
+                    <div 
+                      className="aspect-square relative mb-2 overflow-hidden rounded-lg border"
+                      style={{ borderColor: '#697565' }}
+                    >
                       <img
                         src={product.imageURL}
                         alt={product.name}
-                        className="w-full h-full object-cover group-hover:scale-105"
-                        style={{ transition: 'transform 0.3s ease' }}
+                        className="w-full h-full object-cover group-hover:scale-105 fast-transition"
                       />
                     </div>
-                    <h4 className="font-medium text-sm text-[rgb(236,223,204)]">{product.name}</h4>
-                    <p className="text-[rgb(105,117,101)] text-sm">₹{product.price}</p>
+                    <h4 className="font-medium text-sm text-[#DFD0B8]">{product.name}</h4>
+                    <p className="text-[#948979] text-sm">₹{product.price}</p>
                   </div>
                 ))}
               </div>
@@ -195,7 +202,7 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
           {/* Trending Searches */}
           {!searchQuery && (
             <div className="mb-8">
-              <h3 className="text-lg font-medium mb-4 text-[rgb(236,223,204)] flex items-center">
+              <h3 className="text-lg font-medium mb-4 text-[#DFD0B8] flex items-center">
                 <TrendingUp className="mr-2" size={20} />
                 Trending Searches
               </h3>
@@ -204,8 +211,7 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
                   <button
                     key={index}
                     onClick={() => handleTrendingClick(search)}
-                    className="px-4 py-2 border border-[rgb(105,117,101)] hover:bg-[rgb(24,28,20)] rounded-full text-sm text-[rgb(236,223,204)]"
-                    style={{ backgroundColor: 'rgb(60, 61, 55)' }}
+                    className="btn-secondary px-4 py-2 rounded-full text-sm"
                   >
                     {search}
                   </button>
@@ -217,14 +223,13 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
           {/* Recent Searches */}
           {recentSearches.length > 0 && !searchQuery && (
             <div className="mb-8">
-              <h3 className="text-lg font-medium mb-4 text-[rgb(236,223,204)]">Recent Searches</h3>
+              <h3 className="text-lg font-medium mb-4 text-[#DFD0B8]">Recent Searches</h3>
               <div className="flex flex-wrap gap-2">
                 {recentSearches.map((search, index) => (
                   <button
                     key={index}
                     onClick={() => setSearchQuery(search)}
-                    className="px-4 py-2 border border-[rgb(105,117,101)] hover:bg-[rgb(24,28,20)] rounded-full text-sm text-[rgb(236,223,204)]"
-                    style={{ backgroundColor: 'rgb(60, 61, 55)' }}
+                    className="btn-secondary px-4 py-2 rounded-full text-sm"
                   >
                     {search}
                   </button>
@@ -236,7 +241,7 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
           {/* New This Season */}
           {suggestedProducts.length > 0 && !searchQuery && (
             <div>
-              <h3 className="text-lg font-medium mb-4 text-[rgb(236,223,204)]">New This Season</h3>
+              <h3 className="text-lg font-medium mb-4 text-[#DFD0B8]">New This Season</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {suggestedProducts.map((product) => (
                   <div
@@ -244,16 +249,18 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
                     className="cursor-pointer group"
                     onClick={() => handleProductClick(product)}
                   >
-                    <div className="aspect-square relative mb-2 overflow-hidden rounded-lg border border-[rgb(105,117,101)]">
+                    <div 
+                      className="aspect-square relative mb-2 overflow-hidden rounded-lg border"
+                      style={{ borderColor: '#697565' }}
+                    >
                       <img
                         src={product.imageURL}
                         alt={product.name}
-                        className="w-full h-full object-cover group-hover:scale-105"
-                        style={{ transition: 'transform 0.3s ease' }}
+                        className="w-full h-full object-cover group-hover:scale-105 fast-transition"
                       />
                     </div>
-                    <h4 className="font-medium text-sm text-[rgb(236,223,204)]">{product.name}</h4>
-                    <p className="text-[rgb(105,117,101)] text-sm">₹{product.price}</p>
+                    <h4 className="font-medium text-sm text-[#DFD0B8]">{product.name}</h4>
+                    <p className="text-[#948979] text-sm">₹{product.price}</p>
                   </div>
                 ))}
               </div>
@@ -263,7 +270,7 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
           {/* No Results */}
           {searchQuery && searchResults.length === 0 && !isLoading && (
             <div className="text-center py-8">
-              <p className="text-[rgb(105,117,101)]">No products found for "{searchQuery}"</p>
+              <p className="text-[#948979]">No products found for "{searchQuery}"</p>
             </div>
           )}
         </div>
